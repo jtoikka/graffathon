@@ -3,21 +3,31 @@ package main
 import processing.core._
 import processing.core.PConstants._
 import java.awt.Dimension
+import moonlander.library._
+import ddf.minim._
 
 object ProcessingTest extends PApplet {
-  override def setup() = {
+  lazy val moonlander: Moonlander = Moonlander.initWithSoundtrack(this, "sound/sound.mp3", 125, 2)
+  
+  override def setup() = {  
     size(640, 480, P3D)
     background(0)
     lights()
+    moonlander.start()
   }
   
   override def draw() = {
-    pushMatrix()
-    translate(130, height/2, 0)
-    rotateY(1.25f)
-    rotateX(-0.4f)
-    box(100)
-    popMatrix()
+    moonlander.update()
+    var a = moonlander.getValue("movement")
+//    pushMatrix()
+//    translate(130, height/2, 0)
+//    rotateY(1.25f)
+//    rotateX(-0.4f)
+//    box(100)
+//    popMatrix()
+    clear()
+    rect(a.toInt,a.toInt,10,10)
+    
   }
 
   def main(args: Array[String]) {
