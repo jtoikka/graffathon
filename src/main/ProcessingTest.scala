@@ -104,7 +104,7 @@ object ProcessingTest extends PApplet {
   
   val cow = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "cow", None)
   val quad = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "quad", None)
-  val particle = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.1f, 0.1f, 0.1f), "particle", None)
+  val particle = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.05f, 0.05f, 0.05f), "particle", None)
   
   val corridorEnts = EntityFactory.createCorridorEntities(corridorModels)
   val corridorSect = new Corridor(corridorEnts,Vec3(0,-1,0))
