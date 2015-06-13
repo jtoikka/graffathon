@@ -1,0 +1,14 @@
+00018h	Biisi alkaa  
+
+00118h	Kitara sisään 
+00218h	Jouset sisään
+00318h	Lisää jousia, suora rytmi
+00418h	Rytmi loppuu
+
+00520h	Viimeinen klang!
+00540h	Iso bang 
+00770h	Kirata sisään
+00418h	jouset takata-takata-takatakataka... 
+00A40h	Rytmi loppuu 
+
+
