@@ -53,7 +53,7 @@ object ProcessingTest extends PApplet {
       "pe_00218h",
       "pe_00520h",
       "pe_00540h"
-       ) ++ (for(i <- 5 to 8) yield{
+       ) ++ (for(i <- 1 to 8) yield{
            Vector(
                "light" + i + "_x",
                "light" + i + "_y",
