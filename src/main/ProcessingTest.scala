@@ -1,19 +1,15 @@
 package main
 
+import java.awt.Dimension
+
+import scala.collection.mutable.Map
+
+import javax.media.opengl.GL
+import javax.media.opengl.GL2
+import math._
 import processing.core._
 import processing.core.PConstants._
 import processing.opengl._
-import processing.opengl.PGL._
-import processing.opengl.PJOGL._
-import processing.opengl.PGraphics3D._
-import processing.opengl.PShader._
-import java.awt.Dimension
-import math._
-import javax.media.opengl.GL2
-import javax.media.opengl.GL
-import scala.collection.mutable.Map
-import java.nio.FloatBuffer
-import javax.media.opengl.GL2GL3
 
 object ProcessingTest extends PApplet {
   
@@ -22,7 +18,7 @@ object ProcessingTest extends PApplet {
   val framebuffers = Map[String, Framebuffer]()
   val cow = new Entity(Vec3(0, 0, 0), Vec3(radians(180), 0, 0), Vec3(1, 1, 1), "cow")
   
-  var cameraPos = Vec3(0, 0, 10)
+  var cameraPos = Vec3(10, 0, 10)
   var cameraLookAt = Vec3(0, 0, 0)
   var cameraUp = Vec3(0, 1, 0)
   
@@ -54,12 +50,14 @@ object ProcessingTest extends PApplet {
     
     gl2 = Some(pgl.gl.getGL2)
     
+    gl2.get.glDepthFunc(GL.GL_EQUAL)
+    
     // position, diffuse and normals
     framebuffers("test") = 
       new Framebuffer(
           width, height, 
           Vector(
-              (GL.GL_COLOR_ATTACHMENT0, GL.GL_RGB),
+              (GL.GL_COLOR_ATTACHMENT0, GL.GL_RGBA),
               (GL.GL_COLOR_ATTACHMENT0 + 1, GL.GL_RGBA),
               (GL.GL_COLOR_ATTACHMENT0 + 2, GL.GL_RGB)), gl2.get, true)
   }
@@ -98,8 +96,15 @@ object ProcessingTest extends PApplet {
   
   def drawEntitiesToTexture(entities: Vector[Entity], shader: PShader): Unit = {
     var gl = gl2.get
+//    gl.glDepthFunc(GL.GL_GEQUAL)
+//    gl.glDisable(GL.GL_CULL_FACE)
     gl.glBindFramebuffer(GL.GL_FRAMEBUFFER, framebuffers("test").id)
+//    gl.glClearDepth(0)
     gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
+//    gl.glClearDepth(zFar)
+//    gl.glDisable(GL.GL_DEPTH_TEST)
+//    gl.glDepthFunc(GL.GL_GEQUAL)
+//    gl.glFrontFace(GL.GL_CCW)
     g.beginDraw()
     g.directionalLight(204, 204, 204, -0, -0, -1)
     setCamera(g)
@@ -116,6 +121,7 @@ object ProcessingTest extends PApplet {
       g.popMatrix()
     }) 
     g.endDraw
+    gl.glDepthFunc(GL.GL_LEQUAL)
     gl.glBindFramebuffer(GL.GL_FRAMEBUFFER, 0)
     resetShader
   }
