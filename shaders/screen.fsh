@@ -12,6 +12,11 @@ uniform float roughness;
 uniform float exposure;
 uniform float diffuseIntensity;
 
+// uniform vec3 pointLight1;
+// uniform vec3 pointLight2;
+// uniform vec3 pointLight3;
+// uniform vec3 pointLight4;
+
 uniform vec4 directionalLight;
 
 const float texelH = 1.0/480.0;
@@ -104,13 +109,10 @@ void main() {
 	float rough = calcRoughness(directionalLight, normal);
 	// vec4 diffuse = calcDiffuse(directionalLight, fixedNormal, diffuseIntensity, diffuseColour);
 	vec4 spec = calculateSpecular(directionalLight, fixedNormal, specularIntensity);
-	float exposure = calcExposure(diffuseColour, exposure);
 
-	vec4 shaded = (diffuseColour * diffuseIntensity * rough) + spec;
-
-	// vec3 halfAngle = normalize(directionalLight.xyz + normalize(viewRay));
-	// float blinnTerm = dot(fixedNormal.xyz, halfAngle);
-	// blinnTerm = pow(blinnTerm, specularExponent);
+	vec4 shaded = ((diffuseColour * diffuseIntensity * rough) + spec);// * depthShifted;
+	float exp = calcExposure(shaded, exposure);
+	shaded *= exp;
 
 	gl_FragColor = vec4(shaded.xyz, diffuseColour.a); //vec4(shaded.xyz, 1.0);
 }
