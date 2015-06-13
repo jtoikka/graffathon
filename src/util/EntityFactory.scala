@@ -37,7 +37,7 @@ object EntityFactory{
   }
   
   def createCorridorEntities(models: Vector[String]) = {
-    models.map(a => new Entity(Vec3(0,0,0), Vec3(0,0,0), Vec3(1,1,1), a, Some(a)))
+    models.map(a => new Entity(Vec3(0,0,0), Vec3(mathUtil.degToRad(180),mathUtil.degToRad(180),0), Vec3(1,1,1), a, Some(a)))
   }
   
 }
