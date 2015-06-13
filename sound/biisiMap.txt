@@ -1,14 +1,38 @@
-00018h	Biisi alkaa  
+﻿00018h	Biisi alkaa  
+	alussa pysähtynyt hetken aikaa, hälytysvaloja vilkkuu
+00098h	Pehmeä tumps (etäinen räjähdys? pieni törmäys? etc) ((nopeutuva) slow-mo eteen(?)päin)
 
-00118h	Kitara sisään 
-00218h	Jouset sisään
-00318h	Lisää jousia, suora rytmi
-00418h	Rytmi loppuu
+00118h	Kitara sisään (ensimmäinen pehmeä räjähdys, ollaan normaalinopeudessa)
+00218h	Jouset sisään (BANG iso räjähdys, esim. takana oleva käytävä menee rikki)
+00318h	Lisää jousia, suora rytmi  (semi-nopeaa juoksua)
+00418h	Rytmi loppuu (pysähtyy, katselee ympärilleen)
 
-00520h	Viimeinen klang!
-00540h	Iso bang 
-00770h	Kirata sisään
-00418h	jouset takata-takata-takatakataka... 
-00A40h	Rytmi loppuu 
+00460h vvvv pum (Ikkunoista näkyy räjähdyksiä(?) Alukseen osuu asioita(?))
+00480h
 
+004A0h
+004B0h
+004C0h
+004D0h
+
+004E0h
+004E8h
+004F0h
+004F8h
+
+00500h
+00504h
+00508h
+0050Ch
+00510h
+00514h
+00518h
+0051Ch
+00520h	Shup! (nro 18)
+00540h	Iso bang
+00770h	Kirata sisään 
+00842h	jouset takata-takata-takatakataka... (NOPEA vauhti, pyörimistä)
+00A08h	-> batang, batang, batang, bam (_jumalattomia_ pamauksia)
+00A40h	Rytmi loppuu (tullaan käytävän päähän, ulos, leijutaan avaruudessa romun keskellä hitaasti )
+00B48h tms CREDITS
 
