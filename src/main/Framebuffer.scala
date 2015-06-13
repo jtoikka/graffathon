@@ -37,7 +37,12 @@ class Framebuffer(width: Int, height: Int, attachments: Vector[(Int, Int)], gl: 
       case _ => throw new RuntimeException("Framebuffer incomplete!")
     }
 
-    val drawAttachments = Vector((GL.GL_NONE, 0)) ++ attachments.filter(_._1 != GL.GL_DEPTH_ATTACHMENT)
+    val drawAttachments = {
+      if (depthTest)
+        Vector((GL.GL_NONE, 0)) ++ attachments.filter(_._1 != GL.GL_DEPTH_ATTACHMENT)
+      else
+        attachments.filter(_._1 != GL.GL_DEPTH_ATTACHMENT)
+    }
     val drawBuf = IntBuffer.allocate(drawAttachments.size)
     drawAttachments.foreach(pair => {
       drawBuf.put(pair._1)

@@ -127,9 +127,9 @@ float luma(vec3 rgb) {
     return rgb.g * 0.7152 + rgb.r * 0.2198;
 }
 
-float calcExposure(vec4 diffuse, float exposure) {
+float calcExposure(vec4 diffuse, float exp) {
     float luminance = luma(diffuse.rgb);
-    float brightness = 1.0 - (exp((exposure) * -luma(diffuse.xyz)));
+    float brightness = 1.0 - (exp((exp) * -luma(diffuse.xyz)));
 
     return brightness;
 }
@@ -165,7 +165,8 @@ void main() {
 	vec3 fragPosition = viewRay * depth * 1000.0;
 	// fragPosition.z = depth;
 	vec4 fixedNormal = vec4(normal.x * 2.0 - 1.0, normal.y * 2.0 - 1.0, normal.z * 2.0 - 1.0, 1.0);
-	float depthShifted = depth * 100.0;
+	float depthShifted = 1.0 - depth * 50.0;
+	depthShifted = clamp(depthShifted, 0.0, 1.0);
 
 	vec4 totalDiff = vec4(0.0, 0.0, 0.0, 1.0);
 
@@ -184,7 +185,7 @@ void main() {
 	totalDiff += roughDirect;
 	vec4 spec = calculateSpecular(directionalLight, fixedNormal, specularIntensity);
 
-	vec4 shaded = ((diffuseIntensity * totalDiff) + spec + vec4(ambient, 1.0));// * depthShifted;
+	vec4 shaded = ((diffuseIntensity * totalDiff) + spec + vec4(ambient, 1.0)) * depthShifted;// * depthShifted;
 	float exp = calcExposure(shaded, exposure);
 	shaded *= exp;
 
