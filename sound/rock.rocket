@@ -2,31 +2,58 @@
 	<tracks>
 		<track name="camera_pos_x">
 			<key value="0" interpolation="1" row="24"/>
-			<key value="0" interpolation="0" row="670"/>
 		</track>
 		<track name="camera_pos_y">
 			<key value="0" interpolation="1" row="24"/>
 		</track>
 		<track name="camera_pos_z">
-			<key value="0" interpolation="1" row="24"/>
-			<key value="200" interpolation="0" row="2624"/>
+			<key value="-1" interpolation="1" row="24"/>
+			<key value="0.2" interpolation="1" row="48"/>
+			<key value="1.4" interpolation="1" row="72"/>
+			<key value="82" interpolation="1" row="1088"/>
+			<key value="83" interpolation="0" row="1110"/>
+			<key value="83" interpolation="3" row="1189"/>
+			<key value="87.5" interpolation="1" row="1232"/>
+			<key value="90" interpolation="1" row="1248"/>
+			<key value="98" interpolation="1" row="1280"/>
+			<key value="112.2" interpolation="1" row="1312"/>
+			<key value="114" interpolation="1" row="1344"/>
+			<key value="400" interpolation="0" row="2664"/>
 		</track>
 		<track name="camera_look_x">
 			<key value="0" interpolation="0" row="24"/>
+			<key value="0" interpolation="2" row="1123"/>
+			<key value="-40" interpolation="2" row="1128"/>
+			<key value="-5" interpolation="2" row="1155"/>
+			<key value="15" interpolation="2" row="1160"/>
+			<key value="0" interpolation="0" row="1176"/>
 		</track>
 		<track name="camera_look_y">
-			<key value="0" interpolation="0" row="24"/>
+			<key value="-1" interpolation="0" row="24"/>
+			<key value="-1" interpolation="2" row="1123"/>
+			<key value="5.5" interpolation="2" row="1128"/>
+			<key value="8" interpolation="2" row="1155"/>
+			<key value="-12" interpolation="2" row="1160"/>
+			<key value="-1" interpolation="0" row="1176"/>
 		</track>
 		<track name="camera_look_z">
-			<key value="0" interpolation="0" row="24"/>
+			<key value="-1" interpolation="0" row="24"/>
 		</track>
 		<track name="camera_up_x">
-			<key value="1" interpolation="2" row="24"/>
-			<key value="0" interpolation="0" row="127"/>
+			<key value="0" interpolation="0" row="24"/>
+			<key value="0" interpolation="1" row="1600"/>
+			<key value="1" interpolation="1" row="1616"/>
+			<key value="0" interpolation="1" row="1632"/>
+			<key value="-1" interpolation="1" row="1648"/>
+			<key value="0" interpolation="0" row="1664"/>
 		</track>
 		<track name="camera_up_y">
-			<key value="0" interpolation="2" row="24"/>
-			<key value="1" interpolation="0" row="127"/>
+			<key value="1" interpolation="0" row="24"/>
+			<key value="1" interpolation="1" row="1600"/>
+			<key value="0" interpolation="1" row="1616"/>
+			<key value="-1" interpolation="1" row="1632"/>
+			<key value="0" interpolation="1" row="1648"/>
+			<key value="1" interpolation="0" row="1664"/>
 		</track>
 		<track name="camera_up_z">
 			<key value="0" interpolation="0" row="24"/>
@@ -58,13 +85,33 @@
 			<key value="0.8" interpolation="0" row="0"/>
 		</track>
 		<track name="exposure">
-			<key value="1" interpolation="0" row="0"/>
+			<key value="100" interpolation="0" row="0"/>
 		</track>
 		<track name="roughness">
 			<key value="0.8" interpolation="0" row="0"/>
+			<key value="500" interpolation="0" row="972"/>
+			<key value="0.8" interpolation="0" row="974"/>
+			<key value="250" interpolation="0" row="976"/>
+			<key value="0.2" interpolation="0" row="977"/>
+			<key value="150" interpolation="0" row="979"/>
+			<key value="500" interpolation="0" row="981"/>
+			<key value="0.8" interpolation="0" row="983"/>
+			<key value="500" interpolation="0" row="1005"/>
+			<key value="0.8" interpolation="0" row="1007"/>
+			<key value="250" interpolation="0" row="1009"/>
+			<key value="0.2" interpolation="0" row="1010"/>
+			<key value="150" interpolation="0" row="1012"/>
+			<key value="500" interpolation="0" row="1014"/>
+			<key value="0.8" interpolation="0" row="1016"/>
 		</track>
 		<track name="specularExponent">
 			<key value="60" interpolation="0" row="0"/>
+			<key value="30" interpolation="0" row="972"/>
+			<key value="15" interpolation="0" row="976"/>
+			<key value="60" interpolation="0" row="978"/>
+			<key value="30" interpolation="0" row="1005"/>
+			<key value="15" interpolation="0" row="1009"/>
+			<key value="60" interpolation="0" row="1011"/>
 		</track>
 		<track name="specularIntensity">
 			<key value="1" interpolation="0" row="0"/>
@@ -73,10 +120,10 @@
 		<track name="directionalLight_g"/>
 		<track name="directionalLight_b"/>
 		<track name="directionalLight_a"/>
-		<track name="specColour_r">
+		<track name="specColour_a">
 			<key value="1" interpolation="0" row="0"/>
 		</track>
-		<track name="specColour_a">
+		<track name="specColour_r">
 			<key value="1" interpolation="0" row="0"/>
 		</track>
 		<track name="specColour_g">
@@ -97,6 +144,78 @@
 		<track name="directionalLight_w">
 			<key value="0" interpolation="0" row="0"/>
 		</track>
+		<track name="light1_x"/>
+		<track name="light1_y"/>
+		<track name="light1_z"/>
+		<track name="light1_a"/>
+		<track name="light1_r"/>
+		<track name="light1_g"/>
+		<track name="light1_b"/>
+		<track name="light1_radius"/>
+		<track name="light1_intensity"/>
+		<track name="light2_x"/>
+		<track name="light2_y"/>
+		<track name="light2_z"/>
+		<track name="light2_a"/>
+		<track name="light2_r"/>
+		<track name="light2_g"/>
+		<track name="light2_b"/>
+		<track name="light2_intensity"/>
+		<track name="light2_radius"/>
+		<track name="light3_x"/>
+		<track name="light3_y"/>
+		<track name="light3_z"/>
+		<track name="light3_a"/>
+		<track name="light3_r"/>
+		<track name="light3_g"/>
+		<track name="light3_b"/>
+		<track name="light3_radius"/>
+		<track name="light3_intensity"/>
+		<track name="light4_x"/>
+		<track name="light4_y"/>
+		<track name="light4_z"/>
+		<track name="light4_a"/>
+		<track name="light4_r"/>
+		<track name="light4_g"/>
+		<track name="light4_b"/>
+		<track name="light4_radius"/>
+		<track name="light4_intensity"/>
+		<track name="light5_y"/>
+		<track name="light5_a"/>
+		<track name="light5_g"/>
+		<track name="light5_b"/>
+		<track name="light5_intensity"/>
+		<track name="light6_x"/>
+		<track name="light6_a"/>
+		<track name="light6_r"/>
+		<track name="light6_intensity"/>
+		<track name="light7_z"/>
+		<track name="light7_r"/>
+		<track name="light7_b"/>
+		<track name="light7_radius"/>
+		<track name="light7_g"/>
+		<track name="light7_y"/>
+		<track name="light5_x"/>
+		<track name="light5_z"/>
+		<track name="light5_r"/>
+		<track name="light5_radius"/>
+		<track name="light6_y"/>
+		<track name="light6_z"/>
+		<track name="light6_g"/>
+		<track name="light6_b"/>
+		<track name="light6_radius"/>
+		<track name="light7_x"/>
+		<track name="light7_intensity"/>
+		<track name="light7_a"/>
+		<track name="light8_x"/>
+		<track name="light8_y"/>
+		<track name="light8_z"/>
+		<track name="light8_a"/>
+		<track name="light8_r"/>
+		<track name="light8_g"/>
+		<track name="light8_b"/>
+		<track name="light8_radius"/>
+		<track name="light8_intensity"/>
 	</tracks>
 	<bookmarks/>
 </sync>
