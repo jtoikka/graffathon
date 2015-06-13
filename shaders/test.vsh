@@ -9,10 +9,12 @@ attribute vec3 normal;
 varying vec4 vertColor;
 varying vec3 vertNormal;
 varying vec3 vertLightDir;
+varying vec4 pos;
 
 void main() {
   gl_Position = transform * vertex;  
   vertColor = color;
   vertNormal = normalize(normalMatrix * normal);
   vertLightDir = -lightNormal;
+  pos = transform * vertex;
 }

@@ -10,6 +10,7 @@ uniform float fraction;
 varying vec4 vertColor;
 varying vec3 vertNormal;
 varying vec3 vertLightDir;
+varying vec4 pos;
 
 void main() {  
   float intensity;
@@ -26,5 +27,5 @@ void main() {
     color = vec4(vec3(0.2), 1.0);
   }
 
-  gl_FragColor = color * vertColor;  
+  gl_FragColor = vec4(pos.xyz, 1.0);  
 }
