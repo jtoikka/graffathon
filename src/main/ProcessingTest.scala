@@ -237,10 +237,16 @@ object ProcessingTest extends PApplet {
 //    shader(shaders("screen"))
     
 //    bindFramebuffer("explosions", gl)
+    
     shader(shaders("screen"))
     drawTextureToScreen(fbo.textures, shaders("screen"))
     val explosionShader = shaders("explosions")
+    explosionShader.set("depthTex", 0)
     shader(explosionShader)
+    
+    gl.glActiveTexture(GL.GL_TEXTURE0)
+    gl.glBindTexture(GL.GL_TEXTURE_2D, fbo.textures(0))
+    
     explosions.map(_._1).foreach(exp => {
       explosionShader.set("colour", exp.color.x, exp.color.y, exp.color.z, exp.color.w)
       drawEntities(exp.getEntities(), shaders("explosions"))
