@@ -105,6 +105,42 @@ object ProcessingTest extends PApplet {
   var roughness = 0.8f;
   var directionalLight = Vec4(0.0f, -0.2f, 1.0f, 0).normalize()
   
+  var light1 = Vec3(0, 0, 0)
+  var light2 = Vec3(0, 0, -20)
+  var light3 = Vec3(0, 0, -40)
+  var light4 = Vec3(0, 0, -60)
+  var light5 = Vec3(0, 0, -80)
+  var light6 = Vec3(0, 0, -100)
+  var light7 = Vec3(0, 0, -120)
+  var light8 = Vec3(0, 0, -140)
+  
+  var light1radius = 0.6f;
+  var light2radius = 0.6f;
+  var light3radius = 0.6f;
+  var light4radius = 0.6f;
+  var light5radius = 0.6f;
+  var light6radius = 0.6f;
+  var light7radius = 0.6f;
+  var light8radius = 0.6f;
+  
+  var light1colour = Vec4(1.0f, 1.0f, 1.0f, 1.0f)
+  var light2colour = Vec4(1.0f, 1.0f, 1.0f, 1.0f)
+  var light3colour = Vec4(1.0f, 1.0f, 1.0f, 1.0f)
+  var light4colour = Vec4(1.0f, 1.0f, 1.0f, 1.0f)
+  var light5colour = Vec4(1.0f, 1.0f, 1.0f, 1.0f)
+  var light6colour = Vec4(1.0f, 1.0f, 1.0f, 1.0f)
+  var light7colour = Vec4(1.0f, 1.0f, 1.0f, 1.0f)
+  var light8colour = Vec4(1.0f, 1.0f, 1.0f, 1.0f)
+  
+  var light1intensity = 4.0f;
+  var light2intensity = 4.0f;
+  var light3intensity = 4.0f;
+  var light4intensity = 4.0f;
+  var light5intensity = 4.0f;
+  var light6intensity = 4.0f;
+  var light7intensity = 4.0f;
+  var light8intensity = 4.0f;
+  
   val starfield = util.EntityFactory.createStarfield(
     "quad", new Vec3(0.01f,0.01f,0.01f), 5, 1, zFar, fov, 1, rand)
     
@@ -235,6 +271,39 @@ object ProcessingTest extends PApplet {
     val m11 = frustumScale
     shader.set("m00", m00)
     shader.set("m11", m11)
+    shader.set("light1", light1.x, light1.y, light1.z)
+    shader.set("light2", light2.x, light2.y, light2.z)
+    shader.set("light3", light3.x, light3.y, light3.z)
+    shader.set("light4", light4.x, light4.y, light4.z)
+    shader.set("light5", light5.x, light5.y, light5.z)
+    shader.set("light6", light6.x, light6.y, light6.z)
+    shader.set("light7", light7.x, light7.y, light7.z)
+    shader.set("light8", light8.x, light8.y, light8.z)
+    shader.set("light1radius", light1radius)
+    shader.set("light2radius", light2radius)
+    shader.set("light3radius", light3radius)
+    shader.set("light4radius", light4radius)
+    shader.set("light5radius", light5radius)
+    shader.set("light6radius", light6radius)
+    shader.set("light7radius", light7radius)
+    shader.set("light8radius", light8radius)
+    shader.set("light1Colour", light1colour.x, light1colour.y, light1colour.z, light1colour.w)
+    shader.set("light2Colour", light2colour.x, light2colour.y, light2colour.z, light2colour.w)
+    shader.set("light3Colour", light3colour.x, light3colour.y, light3colour.z, light3colour.w)
+    shader.set("light4Colour", light4colour.x, light4colour.y, light4colour.z, light4colour.w)
+    shader.set("light5Colour", light5colour.x, light5colour.y, light5colour.z, light5colour.w)
+    shader.set("light6Colour", light6colour.x, light6colour.y, light6colour.z, light6colour.w)
+    shader.set("light7Colour", light7colour.x, light7colour.y, light7colour.z, light7colour.w)
+    shader.set("light8Colour", light8colour.x, light8colour.y, light8colour.z, light8colour.w)
+    shader.set("light1intensity", light1intensity)
+    shader.set("light2intensity", light2intensity)
+    shader.set("light3intensity", light3intensity)
+    shader.set("light4intensity", light4intensity)
+    shader.set("light5intensity", light5intensity)
+    shader.set("light6intensity", light6intensity)
+    shader.set("light7intensity", light7intensity)
+    shader.set("light8intensity", light8intensity)
+    shader.set("cameraPos", cameraPos.x, cameraPos.y, cameraPos.z)
     shader.set("specularExponent", vMan("specularExponent"))
     shader.set("specularIntensity", vMan("specularIntensity"))
     shader.set("exposure", vMan("roughness"))
