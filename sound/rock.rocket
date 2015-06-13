@@ -85,7 +85,7 @@
 			<key value="0.8" interpolation="0" row="0"/>
 		</track>
 		<track name="exposure">
-			<key value="100" interpolation="0" row="0"/>
+			<key value="500" interpolation="0" row="0"/>
 		</track>
 		<track name="roughness">
 			<key value="0.8" interpolation="0" row="0"/>

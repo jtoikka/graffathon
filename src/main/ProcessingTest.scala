@@ -53,7 +53,7 @@ object ProcessingTest extends PApplet {
       "pe_00218h",
       "pe_00520h",
       "pe_00540h"
-       ) ++ (for(i <- 1 to 8) yield{
+       ) ++ (for(i <- 5 to 8) yield{
            Vector(
                "light" + i + "_x",
                "light" + i + "_y",
@@ -298,8 +298,8 @@ object ProcessingTest extends PApplet {
     shader.set("cameraPos", cameraPos.x, cameraPos.y, cameraPos.z)
     shader.set("specularExponent", vMan("specularExponent"))
     shader.set("specularIntensity", vMan("specularIntensity"))
-    shader.set("exposure", vMan("roughness"))
-    shader.set("roughness", vMan("specularExponent"))
+    shader.set("exposure", vMan("exposure"))
+    shader.set("roughness", vMan("roughness"))
     shader.set("diffuseIntensity", vMan("diffuseIntensity"))
     shader.set("specularColour", vMan("specColour_r"), vMan("specColour_g"), vMan("specColour_b"), vMan("specColour_a"))
     shader.set("directionalLight", vMan("directionalLight_x"), vMan("directionalLight_y"), vMan("directionalLight_z"), vMan("directionalLight_w"))
