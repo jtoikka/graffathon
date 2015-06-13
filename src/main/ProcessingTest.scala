@@ -150,11 +150,12 @@ object ProcessingTest extends PApplet {
     corridorModels.foreach(s => {
       shapes(s) = loadShape("data/" + s + ".obj")
       textures(s) = loadImage("textures/" + s + ".png")
-      })
+    })
     
     
     var test = loadShader("shaders/test.fsh", "shaders/test.vsh")
     var screen = loadShader("shaders/screen.fsh", "shaders/screen.vsh")
+    var explosions = loadShader("shaders/explosions.fsh", "shaders/explosions.vsh")
     screen.set("positionTex", 0)
     screen.set("diffuseTex", 1)
     screen.set("normalTex", 2)
@@ -180,6 +181,12 @@ object ProcessingTest extends PApplet {
               (GL.GL_COLOR_ATTACHMENT0, GL.GL_RGBA),
               (GL.GL_COLOR_ATTACHMENT0 + 1, GL.GL_RGBA),
               (GL.GL_COLOR_ATTACHMENT0 + 2, GL.GL_RGB)), gl2.get, true)
+    
+    framebuffers("explosions") = 
+      new Framebuffer(
+          width, height,
+          Vector((GL.GL_COLOR_ATTACHMENT0, GL.GL_RGBA)),
+          gl2.get, false)
   }
   
   def toRadians(degrees: Float): Float = {
@@ -199,11 +206,18 @@ object ProcessingTest extends PApplet {
   override def draw() = {
     update()
     val corridorStuff = corridorFull.map(e => e.getEntities()).fold(Vector[Entity]())(_++_)
+    var gl = gl2.get
+    gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
     var tex = drawEntitiesToTexture(corridorStuff ++starfield ++ 
         explosions.map(f => f._1.getEntities()).foldLeft(Vector[Entity]())(_++_), shaders("test"))
     var fbo = framebuffers("test")
+//    shader(shaders("screen"))
+    
+//    bindFramebuffer("explosions", gl)
     shader(shaders("screen"))
     drawTextureToScreen(fbo.textures, shaders("screen"))
+//    unbindFramebuffer(gl)
+//    drawTextureToScreen(framebuffers("explosions").textures, shaders("explosions"))
     resetShader
     
   }
@@ -224,7 +238,7 @@ object ProcessingTest extends PApplet {
   }
   
   def updateStationLights() = {
-    stationLightColor = new Vec4(vMan("station_light_r"), vMan("station_light_b"),vMan("station_light_g"),vMan("station_light_a"))
+    stationLightColor = new Vec4(vMan("station_light_r"), vMan("station_light_g"),vMan("station_light_b"),vMan("station_light_a"))
     stationLightInten = vMan("station_light_intensity")
     stationLightRadius = vMan("station_light_radius")
     
@@ -287,12 +301,13 @@ object ProcessingTest extends PApplet {
       shader.set("light" + i + "Colour", stationLightColor.x,stationLightColor.y,stationLightColor.z,stationLightColor.w )
       shader.set("light" + i + "intensity", stationLightInten)
     }
-    for(i <- 5 to 8){
+    for(i <- 5 to 8) {
       shader.set("light" + i, vMan("light" + i + "_x"), vMan("light" + i + "_y"), vMan("light" + i + "_z"))
       shader.set("light" + i + "radius", vMan("light" + i + "_radius"))
       shader.set("light" + i + "Colour", vMan("light" + i + "_r"), vMan("light" + i + "_g"), vMan("light" + i + "_b"), vMan("light" + i + "_a"))
       shader.set("light" + i + "intensity", vMan("light" + i + "_intensity"))
     }
+   
     shader.set("cameraPos", cameraPos.x, cameraPos.y, cameraPos.z)
     shader.set("specularExponent", vMan("specularExponent"))
     shader.set("specularIntensity", vMan("specularIntensity"))
@@ -311,7 +326,7 @@ object ProcessingTest extends PApplet {
   
   def drawEntitiesToTexture(entities: Vector[Entity], shader: PShader): Unit = {
     var gl = gl2.get
-    gl.glBindFramebuffer(GL.GL_FRAMEBUFFER, framebuffers("test").id)
+    bindFramebuffer("test", gl)
     gl.glDisable(GL.GL_BLEND)
     gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
     g.beginDraw()
@@ -320,6 +335,23 @@ object ProcessingTest extends PApplet {
     setPerspective(g)
     g.shader(shader)
     textureMode(NORMAL)
+    drawEntities(entities) 
+    g.endDraw
+    gl.glDepthFunc(GL.GL_LEQUAL)
+    gl.glEnable(GL.GL_BLEND)
+    unbindFramebuffer(gl)
+    resetShader
+  }
+  
+  def bindFramebuffer(buffer: String, gl: GL2) = {
+    gl.glBindFramebuffer(GL.GL_FRAMEBUFFER, framebuffers(buffer).id)
+  }
+  
+  def unbindFramebuffer(gl: GL2) = {
+    gl.glBindFramebuffer(GL.GL_FRAMEBUFFER, 0)
+  }
+  
+  def drawEntities(entities: Vector[Entity]): Unit = {
     entities.foreach(ent => {
       val shape = shapes(ent.model)
       g.pushMatrix()
@@ -331,23 +363,15 @@ object ProcessingTest extends PApplet {
       g.shape(shape)
       g.popMatrix()
     }) 
-    g.endDraw
-    gl.glDepthFunc(GL.GL_LEQUAL)
-    gl.glEnable(GL.GL_BLEND)
-//    gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA)
-    gl.glBindFramebuffer(GL.GL_FRAMEBUFFER, 0)
-    gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
-    resetShader
   }
   
-  def drawTextureToTexture(textures: Vector[Int], shader: PShader): PImage = {
-//    var gl = gl2.get
-//    gl.glBindFramebuffer(GL.GL_FRAMEBUFFER, framebuffers("first").id)
-//    gl.glDisable(GL.GL_BLEND)
-//    gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
-//    g.BeginDraw()
-    ???
-
+  def drawTextureToTexture(textures: Vector[Int], shader: PShader): Unit = {
+    val gl = gl2.get
+    for (i <- 0 until textures.size) {
+      gl.glActiveTexture(GL.GL_TEXTURE0 + i)
+      gl.glBindTexture(GL.GL_TEXTURE_2D, textures(i))
+    }
+    shape(shapes("quad"))
   }
   
   def drawTextureToScreen(textures: Vector[Int], s: PShader): Unit = {
