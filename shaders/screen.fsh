@@ -204,11 +204,11 @@ void main() {
 	vec4 roughDirect = calcDiffuse(directionalLight, normal) * diffuseColour;
 
 	// float totalDiff = diff1 + diff2 + diff3 + diff4 + roughDirect;
-	totalDiff += roughDirect * 0.5;
+	totalDiff += roughDirect;
 	vec4 spec = calculateSpecular(directionalLight, fixedNormal, specularIntensity);
 
-	vec4 shaded = ((diffuseIntensity * totalDiff) + spec * 0.1);// * depthShifted;
-	float exp = calcExposure(shaded, exposure * 0.5);
+	vec4 shaded = ((diffuseIntensity * totalDiff) + spec);// * depthShifted;
+	float exp = calcExposure(shaded, exposure);
 	shaded *= exp;
 
 	gl_FragColor = vec4(shaded.xyz, diffuseColour.a); //vec4(shaded.xyz, 1.0);

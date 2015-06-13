@@ -1,9 +1,7 @@
 package main
 
 import java.awt.Dimension
-
 import scala.collection.mutable.Map
-
 import javax.media.opengl.GL
 import javax.media.opengl.GL2
 import math._
@@ -25,11 +23,25 @@ import util.ValueManager
 import moonlander.library.Moonlander
 import scala.util.Random
 import util.EntityFactory
+import src.main.Corridor
 
 object ProcessingTest extends PApplet {
   
   lazy val vMan = ValueManager(
       Moonlander.initWithSoundtrack(this, "sound/sound.mp3", 125, 8), 
+      "specularExponent",
+      "specularIntensity",
+      "exposure",
+      "diffuseIntensity",
+      "specColour_r",
+      "specColour_g",
+      "specColour_b",
+      "specColour_a",
+      "roughness",
+      "directionalLight_x",
+      "directionalLight_y",
+      "directionalLight_z",
+      "directionalLight_w",
       "camera_pos_x",
       "camera_pos_y",
       "camera_pos_z",
@@ -44,22 +56,37 @@ object ProcessingTest extends PApplet {
       "pe_00520h",
       "pe_00540h"
       )
-
+  val corridorModels = Vector[String](
+      "cor_pipes_small",
+      "cor_pilars",
+      "cor_pipes_large",
+      "cor_beams_horiz",
+      "cor_roof_panel",
+      "cor_floor",
+      "cor_roof_fill"
+      )
   
   var rand = new Random(2)
   val shapes =  Map[String, PShape]()
   val shaders = Map[String, PShader]()
   val framebuffers = Map[String, Framebuffer]()
+  val textures = Map[String, PImage]()
   
-  val cow = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "cow")
-  val quad = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "quad")
+  val cow = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "cow", None)
+  val quad = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "quad", None)
   
-  val corridorFull = Vector.tabulate(100)(f => new Entity(Vec3(0, -1, f*4), Vec3(toRadians(180), 0, 0), Vec3(1, 1, 1), "corridor"))
+  val corridorEnts = EntityFactory.createCorridorEntities(corridorModels)
+  val corridorSect = new Corridor(corridorEnts,Vec3(0,-1,0))
+  val corridorFull =  Vector.tabulate(100)(f => corridorSect.clone(Vec3(0, -1, f*4)))
+  
+  //val corridorFull = Vector.tabulate(100)(f => new Entity(Vec3(0, -1, f*4), Vec3(toRadians(180), 0, 0), Vec3(1, 1, 1), "corridor", None))
+  
   var explosions = Map[ParticleEmitter, String](
-      (new ParticleEmitter(Vec3(0, 0, 30f), 100, 10, rand, quad), "pe_00118h"),
-      (new ParticleEmitter(Vec3(0, 0, 30f), 100, 10, rand, quad), "pe_00218h"),
-      (new ParticleEmitter(Vec3(0, 0, 30f), 100, 10, rand, quad), "pe_00520h"),
-      (new ParticleEmitter(Vec3(0, 0, 30f), 100, 10, rand, quad), "pe_00540h")
+      (new ParticleEmitter(Vec3(0, 0, 18f), 1000, 100, rand, quad), "pe_00118h"),
+      (new ParticleEmitter(Vec3(0, 0, 38f), 1000, 100, rand, quad), "pe_00218h"),
+      (new ParticleEmitter(Vec3(0, 0, 98f), 1000, 100, rand, quad), "pe_00520h"),
+      (new ParticleEmitter(Vec3(-0.2f, 0, 100f), 1000, 100, rand, quad), "pe_00540h"),
+      (new ParticleEmitter(Vec3(0.2f, 0, 100f), 1000, 100, rand, quad), "pe_00540h")
       )
   
   var cameraPos = Vec3(10, 0, 10)
@@ -87,14 +114,14 @@ object ProcessingTest extends PApplet {
   var light7 = Vec3(0, 0, -120)
   var light8 = Vec3(0, 0, -140)
   
-  var light1radius = 1.0f;
-  var light2radius = 1.0f;
-  var light3radius = 1.0f;
-  var light4radius = 1.0f;
-  var light5radius = 1.0f;
-  var light6radius = 1.0f;
-  var light7radius = 1.0f;
-  var light8radius = 1.0f;
+  var light1radius = 0.6f;
+  var light2radius = 0.6f;
+  var light3radius = 0.6f;
+  var light4radius = 0.6f;
+  var light5radius = 0.6f;
+  var light6radius = 0.6f;
+  var light7radius = 0.6f;
+  var light8radius = 0.6f;
   
   var light1colour = Vec4(1.0f, 1.0f, 1.0f, 1.0f)
   var light2colour = Vec4(1.0f, 1.0f, 1.0f, 1.0f)
@@ -105,14 +132,14 @@ object ProcessingTest extends PApplet {
   var light7colour = Vec4(1.0f, 1.0f, 1.0f, 1.0f)
   var light8colour = Vec4(1.0f, 1.0f, 1.0f, 1.0f)
   
-  var light1intensity = 1.0f;
-  var light2intensity = 1.0f;
-  var light3intensity = 1.0f;
-  var light4intensity = 1.0f;
-  var light5intensity = 1.0f;
-  var light6intensity = 1.0f;
-  var light7intensity = 1.0f;
-  var light8intensity = 1.0f;
+  var light1intensity = 4.0f;
+  var light2intensity = 4.0f;
+  var light3intensity = 4.0f;
+  var light4intensity = 4.0f;
+  var light5intensity = 4.0f;
+  var light6intensity = 4.0f;
+  var light7intensity = 4.0f;
+  var light8intensity = 4.0f;
   
   val starfield = util.EntityFactory.createStarfield(
     "quad", new Vec3(0.01f,0.01f,0.01f), 5, 1, zFar, fov, 1, rand)
@@ -129,7 +156,10 @@ object ProcessingTest extends PApplet {
     shapes("cow") = loadShape("data/cow.obj")
     shapes("quad") = loadShape("data/quad.obj")
     shapes("corridor") = loadShape("data/corridor.obj")
-
+    corridorModels.foreach(s => {
+      shapes(s) = loadShape("data/" + s + ".obj")
+      textures(s) = loadImage("textures/" + s + ".png")
+      })
     
     
     var test = loadShader("shaders/test.fsh", "shaders/test.vsh")
@@ -177,7 +207,9 @@ object ProcessingTest extends PApplet {
   
   override def draw() = {
     update()
-    var tex = drawEntitiesToTexture(corridorFull ++ starfield, shaders("test"))
+    val corridorStuff = corridorFull.map(e => e.getEntities()).fold(Vector[Entity]())(_++_)
+    var tex = drawEntitiesToTexture(corridorStuff ++starfield ++ 
+        explosions.map(f => f._1.getEntities()).foldLeft(Vector[Entity]())(_++_), shaders("test"))
     var fbo = framebuffers("test")
     shader(shaders("screen"))
     drawTextureToScreen(fbo.textures, shaders("screen"))
@@ -239,13 +271,6 @@ object ProcessingTest extends PApplet {
     val m11 = frustumScale
     shader.set("m00", m00)
     shader.set("m11", m11)
-    shader.set("specularExponent", specExponent)
-    shader.set("specularIntensity", specIntensity)
-    shader.set("exposure", exposure)
-    shader.set("roughness", roughness)
-    shader.set("diffuseIntensity", diffuseIntensity)
-    shader.set("specularColour", specColour.x, specColour.y, specColour.z, specColour.w)
-    shader.set("directionalLight", directionalLight.x, directionalLight.y, directionalLight.z, directionalLight.w)
     shader.set("light1", light1.x, light1.y, light1.z)
     shader.set("light2", light2.x, light2.y, light2.z)
     shader.set("light3", light3.x, light3.y, light3.z)
@@ -279,7 +304,13 @@ object ProcessingTest extends PApplet {
     shader.set("light7intensity", light7intensity)
     shader.set("light8intensity", light8intensity)
     shader.set("cameraPos", cameraPos.x, cameraPos.y, cameraPos.z)
-//    pointLight(0, 0, 0, 35, 40, 36);
+    shader.set("specularExponent", vMan("specularExponent"))
+    shader.set("specularIntensity", vMan("specularIntensity"))
+    shader.set("exposure", vMan("roughness"))
+    shader.set("roughness", vMan("specularExponent"))
+    shader.set("diffuseIntensity", vMan("diffuseIntensity"))
+    shader.set("specularColour", vMan("specColour_r"), vMan("specColour_g"), vMan("specColour_b"), vMan("specColour_a"))
+    shader.set("directionalLight", vMan("directionalLight_x"), vMan("directionalLight_y"), vMan("directionalLight_z"), vMan("directionalLight_w"))
   }
   
   def setPointLights(shader: PShader) = {

@@ -1,48 +1,102 @@
 <sync rows="4096">
 	<tracks>
 		<track name="camera_pos_x">
-			<key interpolation="1" value="0" row="24"/>
+			<key value="0" interpolation="1" row="24"/>
+			<key value="0" interpolation="0" row="670"/>
 		</track>
 		<track name="camera_pos_y">
-			<key interpolation="1" value="0" row="24"/>
+			<key value="0" interpolation="1" row="24"/>
 		</track>
 		<track name="camera_pos_z">
-			<key interpolation="1" value="0" row="24"/>
-			<key interpolation="0" value="200" row="2624"/>
+			<key value="0" interpolation="1" row="24"/>
+			<key value="200" interpolation="0" row="2624"/>
 		</track>
 		<track name="camera_look_x">
-			<key interpolation="0" value="0" row="24"/>
+			<key value="0" interpolation="0" row="24"/>
 		</track>
 		<track name="camera_look_y">
-			<key interpolation="0" value="0" row="24"/>
+			<key value="0" interpolation="0" row="24"/>
 		</track>
 		<track name="camera_look_z">
-			<key interpolation="0" value="0" row="24"/>
+			<key value="0" interpolation="0" row="24"/>
 		</track>
 		<track name="camera_up_x">
-			<key interpolation="2" value="1" row="24"/>
-			<key interpolation="0" value="0" row="127"/>
+			<key value="1" interpolation="2" row="24"/>
+			<key value="0" interpolation="0" row="127"/>
 		</track>
 		<track name="camera_up_y">
-			<key interpolation="2" value="0" row="24"/>
-			<key interpolation="0" value="1" row="127"/>
+			<key value="0" interpolation="2" row="24"/>
+			<key value="1" interpolation="0" row="127"/>
 		</track>
 		<track name="camera_up_z">
-			<key interpolation="0" value="0" row="24"/>
+			<key value="0" interpolation="0" row="24"/>
 		</track>
 		<track name="particle_status">
-			<key interpolation="1" value="0" row="0"/>
-			<key interpolation="1" value="0" row="16"/>
-			<key interpolation="1" value="0" row="28"/>
-			<key interpolation="0" value="1" row="56"/>
+			<key value="0" interpolation="1" row="0"/>
+			<key value="0" interpolation="1" row="16"/>
+			<key value="0" interpolation="1" row="28"/>
+			<key value="1" interpolation="0" row="56"/>
 		</track>
 		<track name="pe_00118h">
-			<key interpolation="1" value="0" row="536"/>
-			<key interpolation="0" value="1" row="544"/>
+			<key value="0" interpolation="2" row="280"/>
+			<key value="1" interpolation="0" row="328"/>
 		</track>
-		<track name="pe_00218h"/>
-		<track name="pe_00520h"/>
-		<track name="pe_00540h"/>
+		<track name="pe_00218h">
+			<key value="0" interpolation="1" row="536"/>
+			<key value="1" interpolation="0" row="584"/>
+		</track>
+		<track name="pe_00520h">
+			<key value="1" interpolation="0" row="0"/>
+			<key value="0" interpolation="1" row="1312"/>
+			<key value="2" interpolation="0" row="1384"/>
+		</track>
+		<track name="pe_00540h">
+			<key value="0" interpolation="1" row="1344"/>
+			<key value="1" interpolation="0" row="1384"/>
+		</track>
+		<track name="diffuseIntensity">
+			<key value="0.8" interpolation="0" row="0"/>
+		</track>
+		<track name="exposure">
+			<key value="1" interpolation="0" row="0"/>
+		</track>
+		<track name="roughness">
+			<key value="0.8" interpolation="0" row="0"/>
+		</track>
+		<track name="specularExponent">
+			<key value="60" interpolation="0" row="0"/>
+		</track>
+		<track name="specularIntensity">
+			<key value="1" interpolation="0" row="0"/>
+		</track>
+		<track name="directionalLight_r"/>
+		<track name="directionalLight_g"/>
+		<track name="directionalLight_b"/>
+		<track name="directionalLight_a"/>
+		<track name="specColour_r">
+			<key value="1" interpolation="0" row="0"/>
+		</track>
+		<track name="specColour_a">
+			<key value="1" interpolation="0" row="0"/>
+		</track>
+		<track name="specColour_g">
+			<key value="1" interpolation="0" row="0"/>
+		</track>
+		<track name="specColour_b">
+			<key value="1" interpolation="0" row="0"/>
+		</track>
+		<track name="directionalLight_x">
+			<key value="0" interpolation="0" row="0"/>
+		</track>
+		<track name="directionalLight_y">
+			<key value="-0.2" interpolation="0" row="0"/>
+		</track>
+		<track name="directionalLight_z">
+			<key value="1" interpolation="0" row="0"/>
+		</track>
+		<track name="directionalLight_w">
+			<key value="0" interpolation="0" row="0"/>
+		</track>
 	</tracks>
 	<bookmarks/>
 </sync>

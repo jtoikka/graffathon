@@ -32,7 +32,9 @@ class ParticleEmitter(loc: Vec3, count: Int, maxDistance: Float, rand: Random, p
   }
   
   def getEntities() = {
-      parts
+    if(currentTime <= 0.01)
+      Vector()
+    else parts
     
   }
   
