@@ -289,7 +289,7 @@ object ProcessingTest extends PApplet {
     shader.set("m11", m11)
     for(i <- 1 to 8){
       shader.set("light" + i, vMan("light" + i + "_x"), vMan("light" + i + "_y"), vMan("light" + i + "_z"))
-      shader.set("light" + i + "radius", vMan("light" + i + "_radius"), vMan("light" + i + "_radius"), vMan("light" + i + "_radius"))
+      shader.set("light" + i + "radius", vMan("light" + i + "_radius"))
       shader.set("light" + i + "Colour", vMan("light" + i + "_r"), vMan("light" + i + "_g"), vMan("light" + i + "_b"), vMan("light" + i + "_a"))
       shader.set("light" + i + "intensity", vMan("light" + i + "_intensity"))
     }
