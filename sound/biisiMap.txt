@@ -31,7 +31,7 @@
 00520h	Shup! (nro 18) hidastuu
 00540h	Iso bang! (normaali nopeus?) POMMEJA TULTA JA TULIKIVEÄ
 00842h	jouset takata-takata-takatakataka... (NOPEA vauhti, pyörimistä)
-00A08h	-> batang, batang, batang, bam (_jumalattomia_ pamauksia)
+00A00h	-> batang, batang, batang, bam (_jumalattomia_ pamauksia)
 00A40h	Rytmi loppuu (tullaan käytävän päähän, ulos, leijutaan avaruudessa romun keskellä hitaasti )
 00B48h tms CREDITS
 

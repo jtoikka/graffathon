@@ -31,15 +31,15 @@ object ProcessingTest extends PApplet {
       "specularIntensity",
       "exposure",
       "diffuseIntensity",
-      "specColour_r",
-      "specColour_g",
-      "specColour_b",
-      "specColour_a",
-      "roughness",
-      "directionalLight_x",
-      "directionalLight_y",
-      "directionalLight_z",
-      "directionalLight_w",
+      //"specColour_r",
+      //"specColour_g",
+      //"specColour_b",
+      //"specColour_a",
+      //"roughness",
+      //"directionalLight_x",
+      //"directionalLight_y",
+      //"directionalLight_z",
+      //"directionalLight_w",
       "camera_pos_x",
       "camera_pos_y",
       "camera_pos_z",
@@ -65,7 +65,8 @@ object ProcessingTest extends PApplet {
       "diffuseMultiplier_r",
       "diffuseMultiplier_g",
       "diffuseMultiplier_b",
-      "diffuseMultiplier_a"
+      "diffuseMultiplier_a",
+      "fov"
       ) ++ (for(i <- 5 to 8) yield{
            Vector(
                "light" + i + "_x",
@@ -89,6 +90,10 @@ object ProcessingTest extends PApplet {
       "cor_floor",
       "cor_roof_fill"
       )
+      
+  val specColor = Vec4(0.3f,0.3f,0.4f,0f)
+  val directionalLight = Vec4(0.6f,-0.2f,0.7f,1f)
+  val roughness = 0.8f
   
   var rand = new Random(2)
   val shapes =  Map[String, PShape]()
@@ -118,11 +123,11 @@ object ProcessingTest extends PApplet {
   var cameraLookAt = Vec3(0, 0, 0)
   var cameraUp = Vec3(0, 1, 0)
   
-  var fov = 45.0f
+  //var fov = 45.0f
   var zNear = 0.3f
   var zFar = 1000.0f
   
-  var stationLightPos = Array.tabulate(4)(f => new Vec3(0,0,0))
+  var stationLightPos = Array.tabulate(4)(f => new Vec3(0,0,10))
   var stationLightColor = Vec4(0.2f, 0.0f, 0.2f, 1.0f)
   var stationLightRadius = 1.0f
   var stationLightInten = 1.0f
@@ -131,8 +136,8 @@ object ProcessingTest extends PApplet {
   
   //var diffuseMultiplier = Vec4(1.0f, 1.0f, 1.0f, 1.0f)
   
-  val starfield = util.EntityFactory.createStarfield(
-    "quad", new Vec3(0.01f,0.01f,0.01f), 5, 1, zFar, fov, 1, rand)
+  //val starfield = util.EntityFactory.createStarfield(
+  // "quad", new Vec3(0.01f,0.01f,0.01f), 5, 1, zFar, fov, 1, rand)
     
   var gl2: Option[GL2] = None
     
@@ -202,7 +207,7 @@ object ProcessingTest extends PApplet {
   }
   
   def setPerspective(g: PGraphics) {
-    g.perspective(fov, width.toFloat/height.toFloat, zNear, zFar)
+    g.perspective(toRadians(vMan("fov")), width.toFloat/height.toFloat, zNear, zFar)
   }
   
   override def draw() = {
@@ -251,11 +256,10 @@ object ProcessingTest extends PApplet {
     stationLightRadius = vMan("station_light_radius")
     
     for(i <- 0 to 3){
-      var sectionLength = 0
-      var stationLightCameraOffset = -1
       var pos = stationLightPos(i)
-      val z = ((-cameraPos.z - 2 + 4*i) / 4f).toInt * 4
-      stationLightPos(i) = Vec3(0,0, z)// + stationLightCameraOffset + Vec3(0,0,-sectionLength*i)
+      var z1 = ((-cameraPos.z - 2 + 4*i)/ 4f).toInt * 4
+      z1 = if(z1 > -1) 1000 else z1
+      stationLightPos(i) = Vec3(0,0, z1)// + stationLightCameraOffset + Vec3(0,0,-sectionLength*i)
 
     }
     
@@ -297,7 +301,7 @@ object ProcessingTest extends PApplet {
   }
   
   def setLightingParameters(shader: PShader) = {
-    val frustumScale = calcFrustumScale(fov);
+    val frustumScale = calcFrustumScale( vMan("fov"));
     val m00 = frustumScale / (width.toFloat / height.toFloat)
     val m11 = frustumScale
     shader.set("m00", m00)
@@ -320,10 +324,10 @@ object ProcessingTest extends PApplet {
     shader.set("specularExponent", vMan("specularExponent"))
     shader.set("specularIntensity", vMan("specularIntensity"))
     shader.set("exposure", vMan("exposure"))
-    shader.set("roughness", vMan("roughness"))
+    shader.set("roughness", roughness)
     shader.set("diffuseIntensity", vMan("diffuseIntensity"))
-    shader.set("specularColour", vMan("specColour_r"), vMan("specColour_g"), vMan("specColour_b"), vMan("specColour_a"))
-    shader.set("directionalLight", vMan("directionalLight_x"), vMan("directionalLight_y"), vMan("directionalLight_z"), vMan("directionalLight_w"))
+    shader.set("specularColour", specColor.x,specColor.y,specColor.z,specColor.w)
+    shader.set("directionalLight",directionalLight.x,directionalLight.y,directionalLight.z,directionalLight.w)
     shader.set("diffuseMultiplier", vMan("diffuseMultiplier_r"),vMan("diffuseMultiplier_g"),vMan("diffuseMultiplier_b"),vMan("diffuseMultiplier_a"))
     shader.set("ambient", vMan("ambient_light_r"), vMan("ambient_light_g"), vMan("ambient_light_b"))
   }
