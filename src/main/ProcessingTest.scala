@@ -112,9 +112,9 @@ object ProcessingTest extends PApplet {
   //val corridorFull = Vector.tabulate(100)(f => new Entity(Vec3(0, -1, f*4), Vec3(toRadians(180), 0, 0), Vec3(1, 1, 1), "corridor", None))
   
   var explosions = Map[ParticleEmitter, String](
-      (new ParticleEmitter(Vec3(0, 0, 18f), 1000, 100, rand, particle, Vec4(1, 1, 1, 1)), "pe_00118h"),
-      (new ParticleEmitter(Vec3(0, 0, 38f), 1000, 100, rand, particle, Vec4(1, 1, 1, 1)), "pe_00218h"),
-      (new ParticleEmitter(Vec3(0, 0, 98f), 1000, 100, rand, particle, Vec4(1, 1, 1, 1)), "pe_00520h"),
+      (new ParticleEmitter(Vec3(0, 0, 15f), 1000, 100, rand, particle, Vec4(1, 1, 1, 1)), "pe_00118h"),
+      (new ParticleEmitter(Vec3(0, 0, 35f), 1000, 100, rand, particle, Vec4(1, 1, 1, 1)), "pe_00218h"),
+      (new ParticleEmitter(Vec3(0, 0, 95f), 1000, 100, rand, particle, Vec4(1, 1, 1, 1)), "pe_00520h"),
       (new ParticleEmitter(Vec3(-0.2f, 0, 100f), 1000, 100, rand, particle, Vec4(1, 1, 1, 1)), "pe_00540h"),
       (new ParticleEmitter(Vec3(0.2f, 0, 100f), 1000, 100, rand, particle, Vec4(1, 1, 1, 1)), "pe_00540h")
       )
@@ -220,10 +220,16 @@ object ProcessingTest extends PApplet {
 //    shader(shaders("screen"))
     
 //    bindFramebuffer("explosions", gl)
+    
     shader(shaders("screen"))
     drawTextureToScreen(fbo.textures, shaders("screen"))
     val explosionShader = shaders("explosions")
+    explosionShader.set("depthTex", 0)
     shader(explosionShader)
+    
+    gl.glActiveTexture(GL.GL_TEXTURE0)
+    gl.glBindTexture(GL.GL_TEXTURE_2D, fbo.textures(0))
+    
     explosions.map(_._1).foreach(exp => {
       explosionShader.set("colour", exp.color.x, exp.color.y, exp.color.z, exp.color.w)
       drawEntities(exp.getEntities(), shaders("explosions"))

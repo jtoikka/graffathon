@@ -2,7 +2,9 @@ uniform mat4 transform;
 
 attribute vec4 vertex;
 
+varying vec4 pos;
 
 void main() {
-  gl_Position = transform * vertex;  
+	pos = transform * vertex;
+  gl_Position = pos;  
 }
