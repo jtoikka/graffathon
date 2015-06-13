@@ -112,11 +112,20 @@ object ProcessingTest extends PApplet {
   //val corridorFull = Vector.tabulate(100)(f => new Entity(Vec3(0, -1, f*4), Vec3(toRadians(180), 0, 0), Vec3(1, 1, 1), "corridor", None))
   
   var explosions = Map[ParticleEmitter, String](
-      (new ParticleEmitter(Vec3(0, 0, 15f), 1000, 100, rand, particle, Vec4(1, 1, 1, 1)), "pe_00118h"),
-      (new ParticleEmitter(Vec3(0, 0, 35f), 1000, 100, rand, particle, Vec4(1, 1, 1, 1)), "pe_00218h"),
-      (new ParticleEmitter(Vec3(0, 0, 95f), 1000, 100, rand, particle, Vec4(1, 1, 1, 1)), "pe_00520h"),
-      (new ParticleEmitter(Vec3(-0.2f, 0, 100f), 1000, 100, rand, particle, Vec4(1, 1, 1, 1)), "pe_00540h"),
-      (new ParticleEmitter(Vec3(0.2f, 0, 100f), 1000, 100, rand, particle, Vec4(1, 1, 1, 1)), "pe_00540h")
+      (new ParticleEmitter(Vec3(0, 0, 15f), 1000, 50, rand, particle, Vec4(1, 0.5f, 0f, 0.5f)), "pe_00118h"),
+      (new ParticleEmitter(Vec3(0, 0, 15f), 1000, 50, rand, particle, Vec4(1f, 0.75f, 0f, 0.5f)), "pe_00118h"),
+      (new ParticleEmitter(Vec3(0, 0, 15f), 1000, 50, rand, particle, Vec4(1f, 0.25f, 0f, 0.5f)), "pe_00118h"),
+      
+      (new ParticleEmitter(Vec3(0, 0, 35f), 1000, 50, rand, particle, Vec4(1, 1, 1, 1)), "pe_00218h"),
+      (new ParticleEmitter(Vec3(0, 0, 110f), 1000, 50, rand, particle, Vec4(1, 1, 1, 1)), "pe_00520h"),
+      
+      (new ParticleEmitter(Vec3(-0.3f, 0, 113f), 500, 50, rand, particle, Vec4(1, 0.5f, 0f, 0.5f)), "pe_00540h"),
+      (new ParticleEmitter(Vec3(-0.5f, 0, 113f), 500, 50, rand, particle, Vec4(1f, 1f, 1f, 0.5f)), "pe_00540h"),
+      (new ParticleEmitter(Vec3(-0.6f, 0, 113f), 500, 50, rand, particle, Vec4(1, 1f, 0f, 0.5f)), "pe_00540h"),
+      
+      (new ParticleEmitter(Vec3(0.3f, 0, 113f), 500, 50, rand, particle, Vec4(1, 0.5f, 0f, 0.5f)), "pe_00540h"),
+      (new ParticleEmitter(Vec3(0.5f, 0, 113f), 500, 50, rand, particle, Vec4(1f, 1f, 1f, 0.5f)), "pe_00540h"),
+      (new ParticleEmitter(Vec3(0.6f, 0, 113f), 500, 50, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_00540h")
       )
   
   var cameraPos = Vec3(10, 0, 10)
@@ -126,6 +135,8 @@ object ProcessingTest extends PApplet {
   //var fov = 45.0f
   var zNear = 0.3f
   var zFar = 1000.0f
+  val h = 600
+  val w = 800
   
   var stationLightPos = Array.tabulate(4)(f => new Vec3(0,0,10))
   var stationLightColor = Vec4(0.2f, 0.0f, 0.2f, 1.0f)
@@ -143,7 +154,7 @@ object ProcessingTest extends PApplet {
     
   override def setup() = {
     
-    size(640, 480, OPENGL)
+    size(w, h, OPENGL)
     background(0)
     lights()
     //shapes("teapot") = loadShape("data/teapot.obj")
@@ -432,7 +443,7 @@ object ProcessingTest extends PApplet {
   def main(args: Array[String]) {
     val frame = new javax.swing.JFrame("Graffathon")
     init
-    val preferredSize = new Dimension(640, 480)
+    val preferredSize = new Dimension(w, h)
     frame.getContentPane().setPreferredSize(preferredSize)
     frame.getContentPane().setMinimumSize(preferredSize)
     frame.getContentPane().add(this)
