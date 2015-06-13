@@ -1,0 +1,15 @@
+<sync rows="128">
+	<tracks>
+		<track name="camera_pos_x">
+			<key row="0" interpolation="1" value="0"/>
+		</track>
+		<track name="camera_pos_y">
+			<key row="0" interpolation="1" value="0"/>
+		</track>
+		<track name="camera_pos_z">
+			<key row="0" interpolation="1" value="0"/>
+			<key row="127" interpolation="0" value="40"/>
+		</track>
+	</tracks>
+	<bookmarks/>
+</sync>

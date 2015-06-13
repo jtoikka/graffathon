@@ -12,5 +12,5 @@ void main() {
 	vec4 diffuseColour = texture2D(diffuseTex, UV);
 	vec4 normal = texture2D(normalTex, UV);
 
-	gl_FragColor = vec4(pos.zzz, 1.0);
+	gl_FragColor = diffuseColour; //vec4(pos.zzz, 1.0);
 }

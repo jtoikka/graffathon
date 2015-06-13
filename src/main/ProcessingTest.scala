@@ -14,13 +14,26 @@ import javax.media.opengl.GL
 import scala.collection.mutable.Map
 import java.nio.FloatBuffer
 import javax.media.opengl.GL2GL3
+import util.ValueManager
+import moonlander.library.Moonlander
 
 object ProcessingTest extends PApplet {
+  
+  lazy val vMan = ValueManager(
+      Moonlander.initWithSoundtrack(this, "sound/sound.mp3", 125, 8), 
+      "camera_pos_x",
+      "camera_pos_y",
+      "camera_pos_z"
+      )
   
   val shapes =  Map[String, PShape]()
   val shaders = Map[String, PShader]()
   val framebuffers = Map[String, Framebuffer]()
-  val cow = new Entity(Vec3(0, 0, 0), Vec3(radians(180), 0, 0), Vec3(1, 1, 1), "cow")
+  
+  val cow = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(1, 1, 1), "cow")
+  val corridor = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(1, 1, 1), "corridor")
+  val corridorFull = Vector.tabulate(10)(f => new Entity(Vec3(0, -1, f*4), Vec3(toRadians(180), 0, 0), Vec3(1, 1, 1), "corridor"))
+
   
   var cameraPos = Vec3(0, 0, 10)
   var cameraLookAt = Vec3(0, 0, 0)
@@ -33,12 +46,14 @@ object ProcessingTest extends PApplet {
   var gl2: Option[GL2] = None
     
   override def setup() = {
+    
     size(640, 480, OPENGL)
     background(0)
     lights()
     shapes("teapot") = loadShape("data/teapot.obj")
     shapes("cow") = loadShape("data/cow.obj")
     shapes("quad") = loadShape("data/quad.obj")
+    shapes("corridor") = loadShape("data/corridor.obj")
     var test = loadShader("shaders/test.fsh", "shaders/test.vsh")
     var screen = loadShader("shaders/screen.fsh", "shaders/screen.vsh")
     screen.set("positionTex", 0)
@@ -64,7 +79,7 @@ object ProcessingTest extends PApplet {
               (GL.GL_COLOR_ATTACHMENT0 + 2, GL.GL_RGB)), gl2.get, true)
   }
   
-  def radians(degrees: Float): Float = {
+  def toRadians(degrees: Float): Float = {
     degrees/180.0f * scala.math.Pi.toFloat
   }
   
@@ -73,10 +88,17 @@ object ProcessingTest extends PApplet {
   }
   
   override def draw() = {
-    var tex = drawEntitiesToTexture(Vector(cow), shaders("test"))
+    update()
+    var tex = drawEntitiesToTexture(corridorFull, shaders("test"))
     var fbo = framebuffers("test")
     shader(shaders("screen"))
     drawTextureToScreen(fbo.textures, shaders("screen"))
+  }
+  
+  // For updating logic
+  def update() = {
+    vMan.update()
+    cameraPos = new Vec3(vMan("camera_pos_x"), vMan("camera_pos_y"),vMan("camera_pos_z"))
   }
   
   def defaultCamera(): Unit = {
