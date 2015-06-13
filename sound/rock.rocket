@@ -2,11 +2,21 @@
 	<tracks>
 		<track name="camera_pos_x">
 			<key value="0" interpolation="0" row="24"/>
+			<key value="0.2" interpolation="0" row="2560"/>
+			<key value="0.5" interpolation="0" row="2563"/>
+			<key value="0.15" interpolation="0" row="2566"/>
+			<key value="-0.1" interpolation="0" row="2569"/>
+			<key value="0" interpolation="0" row="2570"/>
 			<key value="0" interpolation="1" row="2664"/>
 			<key value="-15" interpolation="0" row="2728"/>
 		</track>
 		<track name="camera_pos_y">
 			<key value="0" interpolation="0" row="24"/>
+			<key value="-0.2" interpolation="0" row="2560"/>
+			<key value="0" interpolation="0" row="2563"/>
+			<key value="0.3" interpolation="0" row="2566"/>
+			<key value="0.5" interpolation="0" row="2569"/>
+			<key value="0" interpolation="0" row="2570"/>
 			<key value="0" interpolation="1" row="2664"/>
 			<key value="-15" interpolation="0" row="2728"/>
 		</track>
@@ -97,10 +107,7 @@
 			<key value="0.8" interpolation="0" row="0"/>
 		</track>
 		<track name="exposure">
-			<key value="500" interpolation="0" row="0"/>
-		</track>
-		<track name="roughness">
-			<key value="0.8" interpolation="0" row="0"/>
+			<key value="3" interpolation="0" row="0"/>
 			<key value="500" interpolation="0" row="556"/>
 			<key value="0.8" interpolation="0" row="558"/>
 			<key value="250" interpolation="0" row="560"/>
@@ -116,6 +123,9 @@
 			<key value="500" interpolation="0" row="598"/>
 			<key value="0.8" interpolation="0" row="600"/>
 		</track>
+		<track name="roughness">
+			<key value="0.8" interpolation="0" row="0"/>
+		</track>
 		<track name="specularExponent">
 			<key value="60" interpolation="0" row="0"/>
 			<key value="30" interpolation="0" row="556"/>
@@ -126,7 +136,7 @@
 			<key value="60" interpolation="0" row="595"/>
 		</track>
 		<track name="specularIntensity">
-			<key value="1" interpolation="0" row="0"/>
+			<key value="0.5" interpolation="0" row="0"/>
 		</track>
 		<track name="directionalLight_r"/>
 		<track name="directionalLight_g"/>
