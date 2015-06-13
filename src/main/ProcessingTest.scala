@@ -258,14 +258,19 @@ object ProcessingTest extends PApplet {
     setCamera(g)
     setPerspective(g)
     g.shader(shader)
+    textureMode(NORMAL)
     entities.foreach(ent => {
+      val shape = shapes(ent.model)
+      
+      if(ent.texture.isDefined) shape.texture(textures(ent.texture.get))
+      else shape.texture(textures("cor_roof_fill"))
       g.pushMatrix()
       g.translate(ent.position.x, -ent.position.y, ent.position.z)
       g.scale(ent.scale.x, ent.scale.y, ent.scale.z)
       g.rotateX(ent.rotation.x)
       g.rotateY(ent.rotation.y)
       g.rotateZ(ent.rotation.z)
-      g.shape(shapes(ent.model))
+      g.shape(shape)
       g.popMatrix()
     }) 
     g.endDraw

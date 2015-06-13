@@ -7,7 +7,10 @@ precision mediump int;
 
 uniform float fraction;
 
+uniform sampler2D texture;
+
 varying vec4 vertColor;
+varying vec4 vertTexCoord;
 varying vec3 vertNormal;
 varying vec3 vertLightDir;
 varying vec4 pos;
@@ -56,6 +59,6 @@ void main() {
   vec4 enc = packFloatToVec4i(pos.z / 1000.0);
 
   gl_FragData[1] = enc;//vec4(pos.xyz, 0.0);//EncodeFloatRGBA(0.5);  
-  gl_FragData[2] = color;
+  gl_FragData[2] = texture2D(texture, vertTexCoord.st) * color;
   gl_FragData[3] = vec4((vertNormal.x + 1.0) / 2.0, (vertNormal.y + 1.0) / 2.0, (vertNormal.z + 1.0) / 2.0, 1.0);
 }
