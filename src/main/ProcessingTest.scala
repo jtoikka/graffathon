@@ -30,7 +30,13 @@ object ProcessingTest extends PApplet {
       Moonlander.initWithSoundtrack(this, "sound/sound.mp3", 125, 8), 
       "camera_pos_x",
       "camera_pos_y",
-      "camera_pos_z"
+      "camera_pos_z",
+      "camera_look_x",
+      "camera_look_y",
+      "camera_look_z",
+      "camera_up_x",
+      "camera_up_y",
+      "camera_up_z"
       )
   
   val shapes =  Map[String, PShape]()
@@ -38,7 +44,7 @@ object ProcessingTest extends PApplet {
   val framebuffers = Map[String, Framebuffer]()
   
   val cow = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(1, 1, 1), "cow")
-  val corridor = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(1, 1, 1), "corridor")
+  
   val corridorFull = Vector.tabulate(10)(f => new Entity(Vec3(0, -1, f*4), Vec3(toRadians(180), 0, 0), Vec3(1, 1, 1), "corridor"))
 
   
@@ -125,7 +131,10 @@ object ProcessingTest extends PApplet {
   // For updating logic
   def update() = {
     vMan.update()
+    // camera
     cameraPos = new Vec3(vMan("camera_pos_x"), vMan("camera_pos_y"),vMan("camera_pos_z"))
+    cameraLookAt = new Vec3(vMan("camera_look_x"), vMan("camera_look_y"),vMan("camera_look_z"))
+    cameraUp= new Vec3(vMan("camera_up_x"), vMan("camera_up_y"),vMan("camera_up_z"))
   }
   
   def defaultCamera(): Unit = {
