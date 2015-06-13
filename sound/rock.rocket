@@ -156,14 +156,10 @@
 			<key row="24" interpolation="0" value="0"/>
 		</track>
 		<track name="pe_00118h">
-			<key row="280" interpolation="1" value="0"/>
-			<key row="360" interpolation="0" value="1"/>
 			<key row="1296" interpolation="0" value="0"/>
 			<key row="1424" interpolation="0" value="0"/>
 		</track>
 		<track name="pe_00218h">
-			<key row="536" interpolation="1" value="0"/>
-			<key row="584" interpolation="0" value="1"/>
 			<key row="1296" interpolation="0" value="0"/>
 			<key row="1424" interpolation="0" value="0"/>
 		</track>
@@ -304,18 +300,98 @@
 		<track name="light8_intensity"/>
 		<track name="station_light_r">
 			<key row="0" interpolation="0" value="1"/>
+			<key row="920" interpolation="1" value="1"/>
+			<key row="922" interpolation="1" value="1"/>
+			<key row="934" interpolation="1" value="1"/>
+			<key row="936" interpolation="1" value="1"/>
+			<key row="952" interpolation="1" value="1"/>
+			<key row="954" interpolation="1" value="1"/>
+			<key row="966" interpolation="1" value="1"/>
+			<key row="968" interpolation="1" value="1"/>
+			<key row="984" interpolation="1" value="1"/>
+			<key row="986" interpolation="1" value="1"/>
+			<key row="998" interpolation="1" value="1"/>
+			<key row="1000" interpolation="1" value="1"/>
+			<key row="1016" interpolation="1" value="1"/>
+			<key row="1018" interpolation="1" value="1"/>
+			<key row="1030" interpolation="1" value="1"/>
+			<key row="1032" interpolation="1" value="1"/>
 		</track>
 		<track name="station_light_g">
 			<key row="0" interpolation="0" value="0.5"/>
+			<key row="920" interpolation="1" value="0.5"/>
+			<key row="922" interpolation="1" value="0"/>
+			<key row="934" interpolation="1" value="0"/>
+			<key row="936" interpolation="1" value="0.5"/>
+			<key row="952" interpolation="1" value="0.5"/>
+			<key row="954" interpolation="1" value="0"/>
+			<key row="966" interpolation="1" value="0"/>
+			<key row="968" interpolation="1" value="0.5"/>
+			<key row="984" interpolation="1" value="0.5"/>
+			<key row="986" interpolation="1" value="0"/>
+			<key row="998" interpolation="1" value="0"/>
+			<key row="1000" interpolation="1" value="0.5"/>
+			<key row="1016" interpolation="1" value="0.5"/>
+			<key row="1018" interpolation="1" value="0"/>
+			<key row="1030" interpolation="1" value="0"/>
+			<key row="1032" interpolation="1" value="0.5"/>
 		</track>
 		<track name="station_light_b">
 			<key row="0" interpolation="0" value="0.2"/>
+			<key row="920" interpolation="1" value="0.2"/>
+			<key row="922" interpolation="1" value="0"/>
+			<key row="934" interpolation="1" value="0"/>
+			<key row="936" interpolation="1" value="0.2"/>
+			<key row="952" interpolation="1" value="0.2"/>
+			<key row="954" interpolation="1" value="0"/>
+			<key row="966" interpolation="1" value="0"/>
+			<key row="968" interpolation="1" value="0.2"/>
+			<key row="984" interpolation="1" value="0.2"/>
+			<key row="986" interpolation="1" value="0"/>
+			<key row="998" interpolation="1" value="0"/>
+			<key row="1000" interpolation="1" value="0.2"/>
+			<key row="1016" interpolation="1" value="0.2"/>
+			<key row="1018" interpolation="1" value="0"/>
+			<key row="1030" interpolation="1" value="0"/>
+			<key row="1032" interpolation="1" value="0.2"/>
 		</track>
 		<track name="station_light_a">
 			<key row="0" interpolation="0" value="1"/>
+			<key row="920" interpolation="1" value="1"/>
+			<key row="922" interpolation="1" value="1"/>
+			<key row="934" interpolation="1" value="1"/>
+			<key row="936" interpolation="1" value="1"/>
+			<key row="952" interpolation="1" value="1"/>
+			<key row="954" interpolation="1" value="1"/>
+			<key row="966" interpolation="1" value="1"/>
+			<key row="968" interpolation="1" value="1"/>
+			<key row="984" interpolation="1" value="1"/>
+			<key row="986" interpolation="1" value="1"/>
+			<key row="998" interpolation="1" value="1"/>
+			<key row="1000" interpolation="1" value="1"/>
+			<key row="1016" interpolation="1" value="1"/>
+			<key row="1018" interpolation="1" value="1"/>
+			<key row="1030" interpolation="1" value="1"/>
+			<key row="1032" interpolation="1" value="1"/>
 		</track>
 		<track name="station_light_radius">
 			<key row="0" interpolation="0" value="0.4"/>
+			<key row="920" interpolation="1" value="0.4"/>
+			<key row="922" interpolation="1" value="0.4"/>
+			<key row="934" interpolation="1" value="0.4"/>
+			<key row="936" interpolation="1" value="0.4"/>
+			<key row="952" interpolation="1" value="0.4"/>
+			<key row="954" interpolation="1" value="0.4"/>
+			<key row="966" interpolation="1" value="0.4"/>
+			<key row="968" interpolation="1" value="0.4"/>
+			<key row="984" interpolation="1" value="0.4"/>
+			<key row="986" interpolation="1" value="0.4"/>
+			<key row="998" interpolation="1" value="0.4"/>
+			<key row="1000" interpolation="1" value="0.4"/>
+			<key row="1016" interpolation="1" value="0.4"/>
+			<key row="1018" interpolation="1" value="0.4"/>
+			<key row="1030" interpolation="1" value="0.4"/>
+			<key row="1032" interpolation="1" value="0.4"/>
 		</track>
 		<track name="station_light_intensity">
 			<key row="0" interpolation="0" value="7"/>
@@ -359,7 +435,7 @@
 			<key row="872" interpolation="1" value="5"/>
 			<key row="888" interpolation="1" value="7"/>
 			<key row="904" interpolation="1" value="5"/>
-			<key row="920" interpolation="1" value="7"/>
+			<key row="920" interpolation="1" value="10"/>
 			<key row="936" interpolation="1" value="5"/>
 			<key row="952" interpolation="1" value="7"/>
 			<key row="968" interpolation="1" value="5"/>
@@ -507,6 +583,10 @@
 		<track name="fov">
 			<key row="0" interpolation="2" value="90"/>
 			<key row="72" interpolation="0" value="45"/>
+		</track>
+		<track name="pe_00580h">
+			<key row="1408" interpolation="1" value="0"/>
+			<key row="1416" interpolation="0" value="1"/>
 		</track>
 	</tracks>
 	<bookmarks/>

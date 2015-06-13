@@ -53,6 +53,7 @@ object ProcessingTest extends PApplet {
       "pe_00218h",
       "pe_00520h",
       "pe_00540h",
+      "pe_00580h",
       "station_light_r",
       "station_light_b",
       "station_light_g",
@@ -103,7 +104,7 @@ object ProcessingTest extends PApplet {
   
   val cow = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "cow", None)
   val quad = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "quad", None)
-  val particle = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "particle", None)
+  val particle = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.1f, 0.1f, 0.1f), "particle", None)
   
   val corridorEnts = EntityFactory.createCorridorEntities(corridorModels)
   val corridorSect = new Corridor(corridorEnts,Vec3(0,-1,0))
@@ -125,7 +126,12 @@ object ProcessingTest extends PApplet {
       
       (new ParticleEmitter(Vec3(0.3f, 0, 113f), 500, 50, rand, particle, Vec4(1, 0.5f, 0f, 0.5f)), "pe_00540h"),
       (new ParticleEmitter(Vec3(0.5f, 0, 113f), 500, 50, rand, particle, Vec4(1f, 1f, 1f, 0.5f)), "pe_00540h"),
-      (new ParticleEmitter(Vec3(0.6f, 0, 113f), 500, 50, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_00540h")
+      (new ParticleEmitter(Vec3(0.6f, 0, 113f), 500, 50, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_00540h"),
+      
+      (new ParticleEmitter(Vec3(-0.6f, 0.5f, 126.5f), 500, 50, rand, particle, Vec4(1, 1f, 1f, 0.5f)), "pe_00580h"),
+      (new ParticleEmitter(Vec3(-0.6f, 0, 126.5f), 500, 100, rand, particle, Vec4(1, 0.7f, 0f, 0.5f)), "pe_00580h"),
+      (new ParticleEmitter(Vec3(0.6f, 0.5f, 126.5f), 500, 50, rand, particle, Vec4(1, 1f, 1f, 0.5f)), "pe_00580h"),
+      (new ParticleEmitter(Vec3(0.6f, 0, 126.5f), 500, 100, rand, particle, Vec4(1, 0.7f, 0f, 0.5f)), "pe_00580h")
       )
   
   var cameraPos = Vec3(10, 0, 10)
