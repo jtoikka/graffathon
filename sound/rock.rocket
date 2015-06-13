@@ -168,14 +168,14 @@
 			<key row="1296" interpolation="0" value="0"/>
 			<key row="1304" interpolation="1" value="1"/>
 			<key row="1344" interpolation="0" value="0"/>
-			<key row="1384" interpolation="0" value="2"/>
+			<key row="1384" interpolation="0" value="0"/>
 			<key row="1424" interpolation="0" value="0"/>
 		</track>
 		<track name="pe_00540h">
 			<key row="1296" interpolation="0" value="0"/>
 			<key row="1344" interpolation="1" value="0"/>
-			<key row="1384" interpolation="0" value="1"/>
-			<key row="1424" interpolation="0" value="0"/>
+			<key row="1384" interpolation="1" value="1"/>
+			<key row="1480" interpolation="0" value="2"/>
 		</track>
 		<track name="diffuseIntensity">
 			<key row="0" interpolation="0" value="0.8"/>
@@ -586,7 +586,9 @@
 		</track>
 		<track name="pe_00580h">
 			<key row="1408" interpolation="1" value="0"/>
-			<key row="1416" interpolation="0" value="1"/>
+			<key row="1440" interpolation="1" value="1"/>
+			<key row="1488" interpolation="0" value="2"/>
+			<key row="1728" interpolation="0" value="2"/>
 		</track>
 	</tracks>
 	<bookmarks/>
