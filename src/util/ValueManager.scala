@@ -4,7 +4,7 @@ import moonlander.library.Moonlander
 import scala.collection.mutable.Map
 
 object ValueManager{
-  def apply(moonlander: Moonlander, tracks: String*) = {
+  def apply(moonlander: Moonlander, tracks: Vector[String]) = {
     val t = tracks.map(s => (s, 0.0f)).toVector
     val m = Map.apply[String, Float]()
     t.foreach(f => m += f)

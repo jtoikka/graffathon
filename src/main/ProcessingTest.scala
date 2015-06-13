@@ -26,9 +26,7 @@ import util.EntityFactory
 import src.main.Corridor
 
 object ProcessingTest extends PApplet {
-  
-  lazy val vMan = ValueManager(
-      Moonlander.initWithSoundtrack(this, "sound/sound.mp3", 125, 8), 
+  val vManVars = Vector[String](
       "specularExponent",
       "specularIntensity",
       "exposure",
@@ -55,7 +53,20 @@ object ProcessingTest extends PApplet {
       "pe_00218h",
       "pe_00520h",
       "pe_00540h"
-      )
+       ) ++ (for(i <- 1 to 8) yield{
+           Vector(
+               "light" + i + "_x",
+               "light" + i + "_y",
+               "light" + i + "_z",
+               "light" + i + "_radius",
+               "light" + i + "_intensity",
+               "light" + i + "_r",
+               "light" + i + "_g",
+               "light" + i + "_b",
+               "light" + i + "_a"
+               )}).flatten
+  
+  lazy val vMan = ValueManager( Moonlander.initWithSoundtrack(this, "sound/sound.mp3", 125, 8), vManVars)
   val corridorModels = Vector[String](
       "cor_pipes_small",
       "cor_pilars",
@@ -274,6 +285,12 @@ object ProcessingTest extends PApplet {
     val m11 = frustumScale
     shader.set("m00", m00)
     shader.set("m11", m11)
+    for(i <- 1 to 8){
+      shader.set("light" + 1, vMan("light" + i + "_x"), vMan("light" + i + "_y"), vMan("light" + i + "_z"))
+      shader.set("light" + 1 + "radius", vMan("light" + i + "_radius"), vMan("light" + i + "_radius"), vMan("light" + i + "_radius"))
+      shader.set("light" + 1 + "Colour", vMan("light" + i + "_r"), vMan("light" + i + "_g"), vMan("light" + i + "_b"), vMan("light" + i + "_a"))
+      shader.set("light" + 1 + "intensity", vMan("light" + i + "_intensity"))
+    }
     shader.set("light1", light1.x, light1.y, light1.z)
     shader.set("light2", light2.x, light2.y, light2.z)
     shader.set("light3", light3.x, light3.y, light3.z)
