@@ -58,7 +58,7 @@ object ProcessingTest extends PApplet {
   
   var specIntensity = 1.0f
   var specExponent = 60.0f
-  var exposure = 1.0f
+  var exposure = 3.0f
   var diffuseIntensity = 0.8f
   var specColour = Vec4(1, 1, 1, 1)
   var roughness = 0.8f;
@@ -185,6 +185,10 @@ object ProcessingTest extends PApplet {
     shader.set("diffuseIntensity", diffuseIntensity)
     shader.set("specularColour", specColour.x, specColour.y, specColour.z, specColour.w)
     shader.set("directionalLight", directionalLight.x, directionalLight.y, directionalLight.z, directionalLight.w)
+  }
+  
+  def setPointLights(shader: PShader) = {
+    
   }
   
   def drawEntitiesToTexture(entities: Vector[Entity], shader: PShader): Unit = {
