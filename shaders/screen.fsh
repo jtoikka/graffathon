@@ -62,6 +62,8 @@ uniform vec4 diffuseMultiplier;
 
 uniform vec3 cameraPos;
 
+uniform vec3 ambient;
+
 float unpackFloatFromVec4i(const vec4 value)
 {
   const vec4 bitSh = vec4(1.0/(256.0*256.0*256.0), 1.0/(256.0*256.0), 1.0/256.0, 1.0);
@@ -182,7 +184,7 @@ void main() {
 	totalDiff += roughDirect;
 	vec4 spec = calculateSpecular(directionalLight, fixedNormal, specularIntensity);
 
-	vec4 shaded = ((diffuseIntensity * totalDiff) + spec);// * depthShifted;
+	vec4 shaded = ((diffuseIntensity * totalDiff) + spec + vec4(ambient, 1.0));// * depthShifted;
 	float exp = calcExposure(shaded, exposure);
 	shaded *= exp;
 
