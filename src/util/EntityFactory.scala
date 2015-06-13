@@ -19,7 +19,7 @@ object EntityFactory{
     var points = Vector.tabulate[Vec3](starCount)(f => 
         new Vec3(rand.nextFloat() - 0.5f, rand.nextFloat() - 0.5f ,rand.nextFloat() - 0.5f).normalize
         ).map(v => Vec3(v.x*width, v.y*heigth, -1 + maxDepth*v.z))
-        points.map(e => new Entity(e,new Vec3(0,0,0),scale, model))
+        points.map(e => new Entity(e,new Vec3(0,0,0),scale, model, None))
   }
   
   private def moveVertexData(vd: Vector[Vertex], pos: Vec3): Vector[Vertex] = {
@@ -34,6 +34,10 @@ object EntityFactory{
     val a = (for (i <- 0 until p.getVertexCount) yield (p.getVertex(i), p.getNormal(i), p.getTextureU(i),p.getTextureV(i)))
       //a.map(e => mathUtil.pVecToVec(e._1)).toVector
     a.map(e => new Vertex(mathUtil.pVecToVec(e._1), mathUtil.pVecToVec(e._2),new Vec3(1,1,1), new Vec3(e._3,e._4,1)))
+  }
+  
+  def createCorridorEntities(models: Vector[String]) = {
+    models.map(a => new Entity(Vec3(0,0,0), Vec3(0,0,0), Vec3(1,1,1), a, Some(a)))
   }
   
 }
