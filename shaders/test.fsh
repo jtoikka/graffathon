@@ -39,23 +39,23 @@ vec4 packFloatToVec4i(const float value)
 
 
 void main() {  
-  float intensity;
-  vec4 color;
-  intensity = max(0.0, dot(vertLightDir, vertNormal));
+  // float intensity;
+  vec4 color = vec4(1, 1, 1, 1);
+  // intensity = max(0.0, dot(vertLightDir, vertNormal));
 
-  if (intensity > pow(0.95, fraction)) {
-    color = vec4(vec3(1.0), 1.0);
-  } else if (intensity > pow(0.5, fraction)) {
-    color = vec4(vec3(0.6), 1.0);
-  } else if (intensity > pow(0.25, fraction)) {
-    color = vec4(vec3(0.4), 1.0);
-  } else {
-    color = vec4(vec3(0.2), 1.0);
-  }
+  // if (intensity > pow(0.95, fraction)) {
+  //   color = vec4(vec3(1.0), 1.0);
+  // } else if (intensity > pow(0.5, fraction)) {
+  //   color = vec4(vec3(0.6), 1.0);
+  // } else if (intensity > pow(0.25, fraction)) {
+  //   color = vec4(vec3(0.4), 1.0);
+  // } else {
+  //   color = vec4(vec3(0.2), 1.0);
+  // }
 
   vec4 enc = packFloatToVec4i(pos.z / 1000.0);
 
   gl_FragData[1] = enc;//vec4(pos.xyz, 0.0);//EncodeFloatRGBA(0.5);  
   gl_FragData[2] = color;
-  gl_FragData[3] = vec4(vertNormal, 1.0);
+  gl_FragData[3] = vec4((vertNormal.x + 1.0) / 2.0, (vertNormal.y + 1.0) / 2.0, (vertNormal.z + 1.0) / 2.0, 1.0);
 }
