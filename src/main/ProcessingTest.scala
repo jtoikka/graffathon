@@ -64,10 +64,10 @@ object ProcessingTest extends PApplet {
   val shaders = Map[String, PShader]()
   val framebuffers = Map[String, Framebuffer]()
   
-  val cow = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "cow")
-  val quad = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "quad")
+  val cow = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "cow", None)
+  val quad = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "quad", None)
   
-  val corridorFull = Vector.tabulate(100)(f => new Entity(Vec3(0, -1, f*4), Vec3(toRadians(180), 0, 0), Vec3(1, 1, 1), "corridor"))
+  val corridorFull = Vector.tabulate(100)(f => new Entity(Vec3(0, -1, f*4), Vec3(toRadians(180), 0, 0), Vec3(1, 1, 1), "corridor", None))
   var explosions = Map[ParticleEmitter, String](
       (new ParticleEmitter(Vec3(0, 0, 18f), 1000, 100, rand, quad), "pe_00118h"),
       (new ParticleEmitter(Vec3(0, 0, 38f), 1000, 100, rand, quad), "pe_00218h"),
