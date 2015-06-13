@@ -31,15 +31,15 @@ object ProcessingTest extends PApplet {
       "specularIntensity",
       "exposure",
       "diffuseIntensity",
-      "specColour_r",
-      "specColour_g",
-      "specColour_b",
-      "specColour_a",
-      "roughness",
-      "directionalLight_x",
-      "directionalLight_y",
-      "directionalLight_z",
-      "directionalLight_w",
+      //"specColour_r",
+      //"specColour_g",
+      //"specColour_b",
+      //"specColour_a",
+      //"roughness",
+      //"directionalLight_x",
+      //"directionalLight_y",
+      //"directionalLight_z",
+      //"directionalLight_w",
       "camera_pos_x",
       "camera_pos_y",
       "camera_pos_z",
@@ -89,6 +89,10 @@ object ProcessingTest extends PApplet {
       "cor_floor",
       "cor_roof_fill"
       )
+      
+  val specColor = Vec4(0.3f,0.3f,0.4f,0f)
+  val directionalLight = Vec4(0.6f,-0.2f,0.7f,1f)
+  val roughness = 0.8f
   
   var rand = new Random(2)
   val shapes =  Map[String, PShape]()
@@ -312,10 +316,10 @@ object ProcessingTest extends PApplet {
     shader.set("specularExponent", vMan("specularExponent"))
     shader.set("specularIntensity", vMan("specularIntensity"))
     shader.set("exposure", vMan("exposure"))
-    shader.set("roughness", vMan("roughness"))
+    shader.set("roughness", roughness)
     shader.set("diffuseIntensity", vMan("diffuseIntensity"))
-    shader.set("specularColour", vMan("specColour_r"), vMan("specColour_g"), vMan("specColour_b"), vMan("specColour_a"))
-    shader.set("directionalLight", vMan("directionalLight_x"), vMan("directionalLight_y"), vMan("directionalLight_z"), vMan("directionalLight_w"))
+    shader.set("specularColour", specColor.x,specColor.y,specColor.z,specColor.w)
+    shader.set("directionalLight",directionalLight.x,directionalLight.y,directionalLight.z,directionalLight.w)
     shader.set("diffuseMultiplier", vMan("diffuseMultiplier_r"),vMan("diffuseMultiplier_g"),vMan("diffuseMultiplier_b"),vMan("diffuseMultiplier_a"))
     shader.set("ambient", vMan("ambient_light_r"), vMan("ambient_light_g"), vMan("ambient_light_b"))
   }
