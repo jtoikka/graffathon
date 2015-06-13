@@ -7,17 +7,8 @@ precision mediump int;
 
 uniform float fraction;
 
-uniform sampler2D texture;
-
-// varying vec4 vertColor;
-// varying vec4 vertTexCoord;
-// varying vec3 vertNormal;
-// varying vec3 vertLightDir;
-// varying vec4 pos;
-
+uniform vec4 colour;
 
 void main() {  
-  vec4 color = vec4(1, 1, 1, 1);
-
-  gl_FragColor = color;
+  gl_FragColor = colour;
 }
