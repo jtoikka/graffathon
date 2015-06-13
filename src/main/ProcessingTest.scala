@@ -74,6 +74,7 @@ object ProcessingTest extends PApplet {
   
   val cow = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "cow", None)
   val quad = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "quad", None)
+  val particle = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "particle", None)
   
   val corridorEnts = EntityFactory.createCorridorEntities(corridorModels)
   val corridorSect = new Corridor(corridorEnts,Vec3(0,-1,0))
@@ -82,11 +83,11 @@ object ProcessingTest extends PApplet {
   //val corridorFull = Vector.tabulate(100)(f => new Entity(Vec3(0, -1, f*4), Vec3(toRadians(180), 0, 0), Vec3(1, 1, 1), "corridor", None))
   
   var explosions = Map[ParticleEmitter, String](
-      (new ParticleEmitter(Vec3(0, 0, 18f), 1000, 100, rand, quad), "pe_00118h"),
-      (new ParticleEmitter(Vec3(0, 0, 38f), 1000, 100, rand, quad), "pe_00218h"),
-      (new ParticleEmitter(Vec3(0, 0, 98f), 1000, 100, rand, quad), "pe_00520h"),
-      (new ParticleEmitter(Vec3(-0.2f, 0, 100f), 1000, 100, rand, quad), "pe_00540h"),
-      (new ParticleEmitter(Vec3(0.2f, 0, 100f), 1000, 100, rand, quad), "pe_00540h")
+      (new ParticleEmitter(Vec3(0, 0, 18f), 1000, 100, rand, particle), "pe_00118h"),
+      (new ParticleEmitter(Vec3(0, 0, 38f), 1000, 100, rand, particle), "pe_00218h"),
+      (new ParticleEmitter(Vec3(0, 0, 98f), 1000, 100, rand, particle), "pe_00520h"),
+      (new ParticleEmitter(Vec3(-0.2f, 0, 100f), 1000, 100, rand, particle), "pe_00540h"),
+      (new ParticleEmitter(Vec3(0.2f, 0, 100f), 1000, 100, rand, particle), "pe_00540h")
       )
   
   var cameraPos = Vec3(10, 0, 10)
@@ -152,10 +153,12 @@ object ProcessingTest extends PApplet {
     size(640, 480, OPENGL)
     background(0)
     lights()
-    shapes("teapot") = loadShape("data/teapot.obj")
-    shapes("cow") = loadShape("data/cow.obj")
+    //shapes("teapot") = loadShape("data/teapot.obj")
+    //shapes("cow") = loadShape("data/cow.obj")
     shapes("quad") = loadShape("data/quad.obj")
-    shapes("corridor") = loadShape("data/corridor.obj")
+    shapes("particle") = loadShape("data/particle.obj")
+    //shapes("corridor") = loadShape("data/corridor.obj")
+    
     corridorModels.foreach(s => {
       shapes(s) = loadShape("data/" + s + ".obj")
       textures(s) = loadImage("textures/" + s + ".png")
@@ -330,9 +333,6 @@ object ProcessingTest extends PApplet {
     textureMode(NORMAL)
     entities.foreach(ent => {
       val shape = shapes(ent.model)
-      
-      if(ent.texture.isDefined) shape.texture(textures(ent.texture.get))
-      else shape.texture(textures("cor_roof_fill"))
       g.pushMatrix()
       g.translate(ent.position.x, -ent.position.y, ent.position.z)
       g.scale(ent.scale.x, ent.scale.y, ent.scale.z)
