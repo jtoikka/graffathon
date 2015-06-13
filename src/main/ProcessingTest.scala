@@ -13,6 +13,7 @@ import javax.media.opengl.GL2
 import javax.media.opengl.GL
 import scala.collection.mutable.Map
 import java.nio.FloatBuffer
+import javax.media.opengl.GL2GL3
 
 object ProcessingTest extends PApplet {
   
@@ -40,6 +41,9 @@ object ProcessingTest extends PApplet {
     shapes("quad") = loadShape("data/quad.obj")
     var test = loadShader("shaders/test.fsh", "shaders/test.vsh")
     var screen = loadShader("shaders/screen.fsh", "shaders/screen.vsh")
+    screen.set("positionTex", 0)
+    screen.set("diffuseTex", 1)
+    screen.set("normalTex", 2)
     shaders("screen") = screen
     test.set("fraction", 1.0f)
     shaders("test") = test
@@ -50,12 +54,14 @@ object ProcessingTest extends PApplet {
     
     gl2 = Some(pgl.gl.getGL2)
     
+    // position, diffuse and normals
     framebuffers("test") = 
       new Framebuffer(
           width, height, 
           Vector(
-              (GL.GL_COLOR_ATTACHMENT0, GL.GL_RGBA),
-              (GL.GL_COLOR_ATTACHMENT0 + 1, GL.GL_RGBA)), gl2.get, true)
+              (GL.GL_COLOR_ATTACHMENT0, GL.GL_RGB),
+              (GL.GL_COLOR_ATTACHMENT0 + 1, GL.GL_RGBA),
+              (GL.GL_COLOR_ATTACHMENT0 + 2, GL.GL_RGB)), gl2.get, true)
   }
   
   def radians(degrees: Float): Float = {
@@ -71,7 +77,6 @@ object ProcessingTest extends PApplet {
     var fbo = framebuffers("test")
     shader(shaders("screen"))
     drawTextureToScreen(fbo.textures, shaders("screen"))
-//    image(tex, 0, 0)
   }
   
   def defaultCamera(): Unit = {

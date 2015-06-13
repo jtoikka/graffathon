@@ -37,7 +37,7 @@ class Framebuffer(width: Int, height: Int, attachments: Vector[(Int, Int)], gl: 
       case _ => throw new RuntimeException("Framebuffer incomplete!")
     }
 
-    val drawAttachments = Vector((GL.GL_NONE, GL.GL_NONE)) ++ attachments.filter(_._1 != GL.GL_DEPTH_ATTACHMENT)
+    val drawAttachments = Vector((GL.GL_NONE, 0)) ++ attachments.filter(_._1 != GL.GL_DEPTH_ATTACHMENT)
     val drawBuf = IntBuffer.allocate(drawAttachments.size)
     drawAttachments.foreach(pair => {
       drawBuf.put(pair._1)
@@ -54,7 +54,7 @@ class Framebuffer(width: Int, height: Int, attachments: Vector[(Int, Int)], gl: 
     gl.glBindTexture(GL.GL_TEXTURE_2D, texID(0))
     gl.glTexImage2D(
       GL.GL_TEXTURE_2D, 0, format, width, height, 0, 
-      format, GL.GL_UNSIGNED_BYTE, null)
+      format, GL.GL_FLOAT, null)
     gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, GL.GL_NEAREST);
     gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, GL.GL_NEAREST);
     gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_S, GL.GL_CLAMP_TO_EDGE);

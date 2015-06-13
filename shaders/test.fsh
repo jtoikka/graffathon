@@ -27,5 +27,7 @@ void main() {
     color = vec4(vec3(0.2), 1.0);
   }
 
-  gl_FragColor = vec4(pos.xyz, 1.0);  
+  gl_FragData[1] = (pos/16.0);  
+  gl_FragData[2] = color;
+  gl_FragData[3] = vec4(vertNormal, 1.0);
 }
