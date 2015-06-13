@@ -1,10 +1,14 @@
 <sync rows="4096">
 	<tracks>
 		<track name="camera_pos_x">
-			<key value="0" interpolation="1" row="24"/>
+			<key value="0" interpolation="0" row="24"/>
+			<key value="0" interpolation="1" row="2664"/>
+			<key value="-15" interpolation="0" row="2728"/>
 		</track>
 		<track name="camera_pos_y">
-			<key value="0" interpolation="1" row="24"/>
+			<key value="0" interpolation="0" row="24"/>
+			<key value="0" interpolation="1" row="2664"/>
+			<key value="-15" interpolation="0" row="2728"/>
 		</track>
 		<track name="camera_pos_z">
 			<key value="-1" interpolation="1" row="24"/>
@@ -18,7 +22,9 @@
 			<key value="98" interpolation="1" row="1280"/>
 			<key value="112.2" interpolation="1" row="1312"/>
 			<key value="114" interpolation="1" row="1344"/>
-			<key value="400" interpolation="0" row="2664"/>
+			<key value="400" interpolation="1" row="2664"/>
+			<key value="420" interpolation="1" row="2728"/>
+			<key value="500" interpolation="0" row="3204"/>
 		</track>
 		<track name="camera_look_x">
 			<key value="0" interpolation="0" row="24"/>
@@ -27,6 +33,8 @@
 			<key value="-5" interpolation="2" row="1155"/>
 			<key value="15" interpolation="2" row="1160"/>
 			<key value="0" interpolation="0" row="1176"/>
+			<key value="0" interpolation="1" row="2664"/>
+			<key value="70" interpolation="0" row="2728"/>
 		</track>
 		<track name="camera_look_y">
 			<key value="-1" interpolation="0" row="24"/>
@@ -35,9 +43,13 @@
 			<key value="8" interpolation="2" row="1155"/>
 			<key value="-12" interpolation="2" row="1160"/>
 			<key value="-1" interpolation="0" row="1176"/>
+			<key value="0" interpolation="1" row="2664"/>
+			<key value="-100" interpolation="0" row="2728"/>
 		</track>
 		<track name="camera_look_z">
 			<key value="-1" interpolation="0" row="24"/>
+			<key value="-1" interpolation="1" row="2664"/>
+			<key value="70" interpolation="0" row="2728"/>
 		</track>
 		<track name="camera_up_x">
 			<key value="0" interpolation="0" row="24"/>
@@ -89,29 +101,29 @@
 		</track>
 		<track name="roughness">
 			<key value="0.8" interpolation="0" row="0"/>
-			<key value="500" interpolation="0" row="972"/>
-			<key value="0.8" interpolation="0" row="974"/>
-			<key value="250" interpolation="0" row="976"/>
-			<key value="0.2" interpolation="0" row="977"/>
-			<key value="150" interpolation="0" row="979"/>
-			<key value="500" interpolation="0" row="981"/>
-			<key value="0.8" interpolation="0" row="983"/>
-			<key value="500" interpolation="0" row="1005"/>
-			<key value="0.8" interpolation="0" row="1007"/>
-			<key value="250" interpolation="0" row="1009"/>
-			<key value="0.2" interpolation="0" row="1010"/>
-			<key value="150" interpolation="0" row="1012"/>
-			<key value="500" interpolation="0" row="1014"/>
-			<key value="0.8" interpolation="0" row="1016"/>
+			<key value="500" interpolation="0" row="556"/>
+			<key value="0.8" interpolation="0" row="558"/>
+			<key value="250" interpolation="0" row="560"/>
+			<key value="0.2" interpolation="0" row="561"/>
+			<key value="150" interpolation="0" row="563"/>
+			<key value="500" interpolation="0" row="565"/>
+			<key value="0.8" interpolation="0" row="567"/>
+			<key value="500" interpolation="0" row="589"/>
+			<key value="0.8" interpolation="0" row="591"/>
+			<key value="250" interpolation="0" row="593"/>
+			<key value="0.2" interpolation="0" row="594"/>
+			<key value="150" interpolation="0" row="596"/>
+			<key value="500" interpolation="0" row="598"/>
+			<key value="0.8" interpolation="0" row="600"/>
 		</track>
 		<track name="specularExponent">
 			<key value="60" interpolation="0" row="0"/>
-			<key value="30" interpolation="0" row="972"/>
-			<key value="15" interpolation="0" row="976"/>
-			<key value="60" interpolation="0" row="978"/>
-			<key value="30" interpolation="0" row="1005"/>
-			<key value="15" interpolation="0" row="1009"/>
-			<key value="60" interpolation="0" row="1011"/>
+			<key value="30" interpolation="0" row="556"/>
+			<key value="15" interpolation="0" row="560"/>
+			<key value="60" interpolation="0" row="562"/>
+			<key value="30" interpolation="0" row="589"/>
+			<key value="15" interpolation="0" row="593"/>
+			<key value="60" interpolation="0" row="595"/>
 		</track>
 		<track name="specularIntensity">
 			<key value="1" interpolation="0" row="0"/>
