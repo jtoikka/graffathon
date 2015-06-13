@@ -1,48 +1,48 @@
 <sync rows="4096">
 	<tracks>
 		<track name="camera_pos_x">
-			<key row="24" interpolation="1" value="0"/>
-			<key row="280" interpolation="1" value="1"/>
-			<key row="288" interpolation="1" value="0"/>
-			<key row="296" interpolation="1" value="1"/>
-			<key row="304" interpolation="1" value="0"/>
-			<key row="312" interpolation="1" value="1"/>
-			<key row="320" interpolation="1" value="0"/>
-			<key row="328" interpolation="1" value="1"/>
-			<key row="336" interpolation="1" value="0"/>
-			<key row="344" interpolation="1" value="1"/>
-			<key row="352" interpolation="1" value="0"/>
-			<key row="360" interpolation="1" value="1"/>
-			<key row="368" interpolation="1" value="0"/>
-			<key row="376" interpolation="1" value="1"/>
+			<key interpolation="1" value="0" row="24"/>
 		</track>
 		<track name="camera_pos_y">
-			<key row="24" interpolation="1" value="0"/>
+			<key interpolation="1" value="0" row="24"/>
 		</track>
 		<track name="camera_pos_z">
-			<key row="24" interpolation="1" value="0"/>
-			<key row="127" interpolation="0" value="40"/>
+			<key interpolation="1" value="0" row="24"/>
+			<key interpolation="0" value="200" row="2624"/>
 		</track>
 		<track name="camera_look_x">
-			<key row="24" interpolation="0" value="0"/>
+			<key interpolation="0" value="0" row="24"/>
 		</track>
 		<track name="camera_look_y">
-			<key row="24" interpolation="0" value="0"/>
+			<key interpolation="0" value="0" row="24"/>
 		</track>
 		<track name="camera_look_z">
-			<key row="24" interpolation="0" value="0"/>
+			<key interpolation="0" value="0" row="24"/>
 		</track>
 		<track name="camera_up_x">
-			<key row="24" interpolation="2" value="1"/>
-			<key row="127" interpolation="0" value="0"/>
+			<key interpolation="2" value="1" row="24"/>
+			<key interpolation="0" value="0" row="127"/>
 		</track>
 		<track name="camera_up_y">
-			<key row="24" interpolation="2" value="0"/>
-			<key row="127" interpolation="0" value="1"/>
+			<key interpolation="2" value="0" row="24"/>
+			<key interpolation="0" value="1" row="127"/>
 		</track>
 		<track name="camera_up_z">
-			<key row="24" interpolation="0" value="0"/>
+			<key interpolation="0" value="0" row="24"/>
 		</track>
+		<track name="particle_status">
+			<key interpolation="1" value="0" row="0"/>
+			<key interpolation="1" value="0" row="16"/>
+			<key interpolation="1" value="0" row="28"/>
+			<key interpolation="0" value="1" row="56"/>
+		</track>
+		<track name="pe_00118h">
+			<key interpolation="1" value="0" row="536"/>
+			<key interpolation="0" value="1" row="544"/>
+		</track>
+		<track name="pe_00218h"/>
+		<track name="pe_00520h"/>
+		<track name="pe_00540h"/>
 	</tracks>
 	<bookmarks/>
 </sync>

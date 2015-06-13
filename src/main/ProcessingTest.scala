@@ -16,6 +16,8 @@ import java.nio.FloatBuffer
 import javax.media.opengl.GL2GL3
 import util.ValueManager
 import moonlander.library.Moonlander
+import scala.util.Random
+import util.EntityFactory
 
 object ProcessingTest extends PApplet {
   
@@ -29,17 +31,29 @@ object ProcessingTest extends PApplet {
       "camera_look_z",
       "camera_up_x",
       "camera_up_y",
-      "camera_up_z"
+      "camera_up_z",
+      "pe_00118h",
+      "pe_00218h",
+      "pe_00520h",
+      "pe_00540h"
       )
+
   
+  var rand = new Random(2)
   val shapes =  Map[String, PShape]()
   val shaders = Map[String, PShader]()
   val framebuffers = Map[String, Framebuffer]()
   
-  val cow = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(1, 1, 1), "cow")
+  val cow = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "cow")
+  val quad = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "quad")
   
-  val corridorFull = Vector.tabulate(10)(f => new Entity(Vec3(0, -1, f*4), Vec3(toRadians(180), 0, 0), Vec3(1, 1, 1), "corridor"))
-
+  val corridorFull = Vector.tabulate(100)(f => new Entity(Vec3(0, -1, f*4), Vec3(toRadians(180), 0, 0), Vec3(1, 1, 1), "corridor"))
+  var explosions = Map[ParticleEmitter, String](
+      (new ParticleEmitter(Vec3(0, 0, 30f), 100, 10, rand, quad), "pe_00118h"),
+      (new ParticleEmitter(Vec3(0, 0, 30f), 100, 10, rand, quad), "pe_00218h"),
+      (new ParticleEmitter(Vec3(0, 0, 30f), 100, 10, rand, quad), "pe_00520h"),
+      (new ParticleEmitter(Vec3(0, 0, 30f), 100, 10, rand, quad), "pe_00540h")
+      )
   
   var cameraPos = Vec3(0, 0, 10)
   var cameraLookAt = Vec3(0, 0, 0)
@@ -49,6 +63,10 @@ object ProcessingTest extends PApplet {
   var zNear = 0.3f;
   var zFar = 1000.0f;
   
+  val starfield = util.EntityFactory.createStarfield(
+    "quad", new Vec3(0.01f,0.01f,0.01f), 5, 1, zFar, fov, 1, rand)
+    
+    
   var gl2: Option[GL2] = None
     
   override def setup() = {
@@ -60,6 +78,9 @@ object ProcessingTest extends PApplet {
     shapes("cow") = loadShape("data/cow.obj")
     shapes("quad") = loadShape("data/quad.obj")
     shapes("corridor") = loadShape("data/corridor.obj")
+
+    
+    
     var test = loadShader("shaders/test.fsh", "shaders/test.vsh")
     var screen = loadShader("shaders/screen.fsh", "shaders/screen.vsh")
     screen.set("positionTex", 0)
@@ -95,7 +116,7 @@ object ProcessingTest extends PApplet {
   
   override def draw() = {
     update()
-    var tex = drawEntitiesToTexture(corridorFull, shaders("test"))
+    var tex = drawEntitiesToTexture(corridorFull ++ starfield, shaders("test"))
     var fbo = framebuffers("test")
     shader(shaders("screen"))
     drawTextureToScreen(fbo.textures, shaders("screen"))
@@ -103,11 +124,15 @@ object ProcessingTest extends PApplet {
   
   // For updating logic
   def update() = {
+
     vMan.update()
+    explosions.foreach(e => e._1.updateTo(vMan(e._2)))
+    
     // camera
     cameraPos = new Vec3(vMan("camera_pos_x"), vMan("camera_pos_y"),vMan("camera_pos_z"))
     cameraLookAt = new Vec3(vMan("camera_look_x"), vMan("camera_look_y"),vMan("camera_look_z"))
     cameraUp= new Vec3(vMan("camera_up_x"), vMan("camera_up_y"),vMan("camera_up_z"))
+    //starfield.position = cameraPos
   }
   
   def defaultCamera(): Unit = {
