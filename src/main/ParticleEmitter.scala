@@ -18,21 +18,21 @@ class ParticleEmitter(loc: Vec3, count: Int, maxDistance: Float, rand: Random, p
   val emmitData = Vector.tabulate[EmitterData](count)(f => 
     new EmitterData(
       new Vec3(rand.nextFloat() - 0.5f,rand.nextFloat() - 0.5f ,rand.nextFloat() - 0.5f).normalize,
-      new Vec3(rand.nextFloat() - 0.5f,rand.nextFloat() - 0.5f ,rand.nextFloat() - 0.5f).normalize,
+      new Vec3(rand.nextFloat()*100,rand.nextFloat()*100 ,rand.nextFloat()*100),
       rand.nextFloat() 
     ))
     
   def updateTo(time: Float){
-    currentTime = time;
+    currentTime = time
     //parts.indices.foreach(x => parts(x).position = loc + vectors(x).normalize * (time * maxDistance))
     parts.indices.foreach(x => {
       parts(x).position = loc + (emmitData(x).dir * (currentTime * maxDistance) * emmitData(x).distMultiplier)
-      parts(x).rotation = parts(x).rotation * currentTime
+      parts(x).rotation = emmitData(x).rotation * currentTime
     })
   }
   
   def getEntities() = {
-    if(currentTime <= 0.01)
+    if(currentTime <= 0.0001)
       Vector()
     else parts
     
