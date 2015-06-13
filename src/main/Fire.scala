@@ -12,5 +12,5 @@ class Fire () {
     
   }
   
-  def grow(Entity, )
+//  def grow(Entity, )
 }
