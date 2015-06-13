@@ -1,9 +1,7 @@
 package main
 
 import java.awt.Dimension
-
 import scala.collection.mutable.Map
-
 import javax.media.opengl.GL
 import javax.media.opengl.GL2
 import math._
@@ -25,6 +23,7 @@ import util.ValueManager
 import moonlander.library.Moonlander
 import scala.util.Random
 import util.EntityFactory
+import src.main.Corridor
 
 object ProcessingTest extends PApplet {
   
@@ -57,17 +56,31 @@ object ProcessingTest extends PApplet {
       "pe_00520h",
       "pe_00540h"
       )
-
+  val corridorModels = Vector[String](
+      "cor_pipes_small",
+      "cor_pilars",
+      "cor_pipes_large",
+      "cor_beams_horiz",
+      "cor_roof_panel",
+      "cor_floor",
+      "cor_roof_fill"
+      )
   
   var rand = new Random(2)
   val shapes =  Map[String, PShape]()
   val shaders = Map[String, PShader]()
   val framebuffers = Map[String, Framebuffer]()
+  val textures = Map[String, PImage]()
   
-  val cow = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "cow")
-  val quad = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "quad")
+  val cow = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "cow", None)
+  val quad = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "quad", None)
   
-  val corridorFull = Vector.tabulate(100)(f => new Entity(Vec3(0, -1, f*4), Vec3(toRadians(180), 0, 0), Vec3(1, 1, 1), "corridor"))
+  val corridorEnts = EntityFactory.createCorridorEntities(corridorModels)
+  val corridorSect = new Corridor(corridorEnts,Vec3(0,-1,0))
+  val corridorFull =  Vector.tabulate(100)(f => corridorSect.clone(Vec3(0, -1, f*4)))
+  
+  //val corridorFull = Vector.tabulate(100)(f => new Entity(Vec3(0, -1, f*4), Vec3(toRadians(180), 0, 0), Vec3(1, 1, 1), "corridor", None))
+  
   var explosions = Map[ParticleEmitter, String](
       (new ParticleEmitter(Vec3(0, 0, 18f), 1000, 100, rand, quad), "pe_00118h"),
       (new ParticleEmitter(Vec3(0, 0, 38f), 1000, 100, rand, quad), "pe_00218h"),
@@ -107,7 +120,10 @@ object ProcessingTest extends PApplet {
     shapes("cow") = loadShape("data/cow.obj")
     shapes("quad") = loadShape("data/quad.obj")
     shapes("corridor") = loadShape("data/corridor.obj")
-
+    corridorModels.foreach(s => {
+      shapes(s) = loadShape("data/" + s + ".obj")
+      textures(s) = loadImage("textures/" + s + ".png")
+      })
     
     
     var test = loadShader("shaders/test.fsh", "shaders/test.vsh")
@@ -155,7 +171,8 @@ object ProcessingTest extends PApplet {
   
   override def draw() = {
     update()
-    var tex = drawEntitiesToTexture(corridorFull ++ starfield ++ 
+    val corridorStuff = corridorFull.map(e => e.getEntities()).fold(Vector[Entity]())(_++_)
+    var tex = drawEntitiesToTexture(corridorStuff ++starfield ++ 
         explosions.map(f => f._1.getEntities()).foldLeft(Vector[Entity]())(_++_), shaders("test"))
     var fbo = framebuffers("test")
     shader(shaders("screen"))

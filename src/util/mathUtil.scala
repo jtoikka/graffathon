@@ -8,11 +8,11 @@ import math.Vec3
  * @author Toni
  */
 object mathUtil {
-  def degToRad(d: Float) = {
-    (Math.PI/180) * d
+  def degToRad(d: Float): Float = {
+    ((Math.PI/180) * d).toFloat
   }
-  def radToDeg(r: Float) = {
-    (r/Math.PI) * 180f
+  def radToDeg(r: Float): Float = {
+    ((r/Math.PI) * 180f).toFloat
   }
   
   def pVecToVec(p: PVector) = {
