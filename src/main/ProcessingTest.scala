@@ -162,6 +162,8 @@ object ProcessingTest extends PApplet {
     shaders("screen") = screen
     test.set("fraction", 1.0f)
     shaders("test") = test
+    shaders("explosions") = explosions
+//    shader
     
     var pgl = beginPGL().asInstanceOf[PJOGL]
     
@@ -208,14 +210,15 @@ object ProcessingTest extends PApplet {
     val corridorStuff = corridorFull.map(e => e.getEntities()).fold(Vector[Entity]())(_++_)
     var gl = gl2.get
     gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
-    var tex = drawEntitiesToTexture(corridorStuff ++starfield ++ 
-        explosions.map(f => f._1.getEntities()).foldLeft(Vector[Entity]())(_++_), shaders("test"))
+    var tex = drawEntitiesToTexture(corridorStuff, shaders("test"))
     var fbo = framebuffers("test")
 //    shader(shaders("screen"))
     
 //    bindFramebuffer("explosions", gl)
     shader(shaders("screen"))
     drawTextureToScreen(fbo.textures, shaders("screen"))
+    shader(shaders("explosions"))
+    drawEntities(explosions.map(f => f._1.getEntities()).foldLeft(Vector[Entity]())(_++_), shaders("explosions"))
 //    unbindFramebuffer(gl)
 //    drawTextureToScreen(framebuffers("explosions").textures, shaders("explosions"))
     resetShader
@@ -340,6 +343,23 @@ object ProcessingTest extends PApplet {
     gl.glDepthFunc(GL.GL_LEQUAL)
     gl.glEnable(GL.GL_BLEND)
     unbindFramebuffer(gl)
+    resetShader
+  }
+  
+  def drawEntities(entities: Vector[Entity], shader: PShader): Unit = {
+    var gl = gl2.get
+//    gl.glDisable(GL.GL_BLEND)
+//    gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
+    g.beginDraw()
+    g.directionalLight(204, 204, 204, -0, -0, -1)
+    setCamera(g)
+    setPerspective(g)
+    g.shader(shader)
+    textureMode(NORMAL)
+    drawEntities(entities) 
+    g.endDraw
+//    gl.glDepthFunc(GL.GL_LEQUAL)
+//    gl.glEnable(GL.GL_BLEND)
     resetShader
   }
   

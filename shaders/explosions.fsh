@@ -1,10 +1,23 @@
-#define NUM_LIGHTS 8
+#ifdef GL_ES
+precision mediump float;
+precision mediump int;
+#endif
 
-varying vec2 UV;
+#define PROCESSING_TEXLIGHT_SHADER
 
-uniform sampler2D screen;
+uniform float fraction;
 
-void main() {
-	vec4 diffuse = Texture2D(screen, UV);
-	gl_FragColor = diffuse;
+uniform sampler2D texture;
+
+// varying vec4 vertColor;
+// varying vec4 vertTexCoord;
+// varying vec3 vertNormal;
+// varying vec3 vertLightDir;
+// varying vec4 pos;
+
+
+void main() {  
+  vec4 color = vec4(1, 1, 1, 1);
+
+  gl_FragColor = color;
 }
