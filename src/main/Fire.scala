@@ -2,8 +2,8 @@ package src.main
 
 
 
-class Fire {
-//  spheres
+class Fire () {
+  val spheres = scala.collection.mutable.Queue
   
   def updateTo(time: Float) = {
     
