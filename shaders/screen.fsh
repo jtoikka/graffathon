@@ -64,8 +64,7 @@ uniform vec3 cameraPos;
 
 uniform vec3 ambient;
 
-float unpackFloatFromVec4i(const vec4 value)
-{
+float unpackFloatFromVec4i(const vec4 value) {
   const vec4 bitSh = vec4(1.0/(256.0*256.0*256.0), 1.0/(256.0*256.0), 1.0/256.0, 1.0);
   return(dot(value, bitSh));
 }
