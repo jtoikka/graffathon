@@ -142,6 +142,8 @@ object ProcessingTest extends PApplet {
   var light7intensity = 4.0f;
   var light8intensity = 4.0f;
   
+  var diffuseMultiplier = Vec4(1.0f, 1.0f, 1.0f, 1.0f)
+  
   val starfield = util.EntityFactory.createStarfield(
     "quad", new Vec3(0.01f,0.01f,0.01f), 5, 1, zFar, fov, 1, rand)
     
@@ -314,6 +316,7 @@ object ProcessingTest extends PApplet {
     shader.set("diffuseIntensity", vMan("diffuseIntensity"))
     shader.set("specularColour", vMan("specColour_r"), vMan("specColour_g"), vMan("specColour_b"), vMan("specColour_a"))
     shader.set("directionalLight", vMan("directionalLight_x"), vMan("directionalLight_y"), vMan("directionalLight_z"), vMan("directionalLight_w"))
+    shader.set("diffuseMultiplier", diffuseMultiplier.x, diffuseMultiplier.y, diffuseMultiplier.z, diffuseMultiplier.w)
   }
   
   def setPointLights(shader: PShader) = {

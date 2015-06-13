@@ -58,6 +58,8 @@ uniform float light6intensity;
 uniform float light7intensity;
 uniform float light8intensity;
 
+uniform vec4 diffuseMultiplier;
+
 uniform vec3 cameraPos;
 
 float unpackFloatFromVec4i(const vec4 value)
@@ -156,6 +158,7 @@ void main() {
 	float depth = unpackFloatFromVec4i(pos);
 	if (depth == 1.0) discard;
 	vec4 diffuseColour = texture2D(diffuseTex, UV);
+	diffuseColour *= diffuseMultiplier;
 	vec4 normal = texture2D(normalTex, UV);
 	vec3 fragPosition = viewRay * depth * 1000.0;
 	// fragPosition.z = depth;
@@ -164,42 +167,14 @@ void main() {
 
 	vec4 totalDiff = vec4(0.0, 0.0, 0.0, 1.0);
 
-	// // for (int i = 0; i < lightCount; i++) {
-	// 	vec3 lpos = light1 + cameraPos;
-	// 	// vec3 direction = fragPosition - lpos;
-	// 	vec3 direction = normalize(-fragPosition + lpos);
-	// 	float l = length(fragPosition - lpos);
-	// 	float diff = calcDiffuse(vec4(direction, 0.0), normal);
-	// 	float att = attenuation(pointLightRadius, l);
-	totalDiff += calcLight(light1, fragPosition, normal, light1radius) * light1Colour * light1intensity;
-	totalDiff += calcLight(light2, fragPosition, normal, light2radius) * light2Colour * light2intensity;
-	totalDiff += calcLight(light3, fragPosition, normal, light3radius) * light3Colour * light3intensity;
-	totalDiff += calcLight(light4, fragPosition, normal, light4radius) * light4Colour * light4intensity;
-	totalDiff += calcLight(light5, fragPosition, normal, light5radius) * light5Colour * light5intensity;
-	totalDiff += calcLight(light6, fragPosition, normal, light6radius) * light6Colour * light6intensity;
-	totalDiff += calcLight(light7, fragPosition, normal, light7radius) * light7Colour * light7intensity;
-	totalDiff += calcLight(light8, fragPosition, normal, light8radius) * light8Colour * light8intensity;
-	// }
-
-	// vec3 lightDir1 = light1.xyz - fragPosition;
-	// float rough1 = calcRoughness(vec4(lightDir1, 0.0), normal);
-	// float att1 = attenuation(pointLightRadius, length(lightDir1));
-	// float diff1 = rough1 * att1 * 0.1;
-
-	// vec3 lightDir2 = light2.xyz - fragPosition;
-	// float rough2 = calcRoughness(vec4(lightDir2, 0.0), normal);
-	// float att2 = attenuation(pointLightRadius, length(lightDir2));
-	// float diff2 = rough1 * att2 * 0.1;
-
-	// vec3 lightDir3 = light3.xyz - fragPosition;
-	// float rough3 = calcRoughness(vec4(lightDir3, 0.0), normal);
-	// float att3 = attenuation(pointLightRadius, length(lightDir3));
-	// float diff3 = rough3 * att3 * 0.1;
-
-	// vec3 lightDir4 = light4.xyz - fragPosition;
-	// float rough4 = calcRoughness(vec4(lightDir4, 0.0), normal);
-	// float att4 = attenuation(pointLightRadius, length(lightDir1));
-	// float diff4 = rough1 * att4 * 0.1;
+	totalDiff += calcLight(light1, fragPosition, normal, light1radius) * light1Colour * light1intensity * diffuseColour;
+	totalDiff += calcLight(light2, fragPosition, normal, light2radius) * light2Colour * light2intensity * diffuseColour;
+	totalDiff += calcLight(light3, fragPosition, normal, light3radius) * light3Colour * light3intensity * diffuseColour;
+	totalDiff += calcLight(light4, fragPosition, normal, light4radius) * light4Colour * light4intensity * diffuseColour;
+	totalDiff += calcLight(light5, fragPosition, normal, light5radius) * light5Colour * light5intensity * diffuseColour;
+	totalDiff += calcLight(light6, fragPosition, normal, light6radius) * light6Colour * light6intensity * diffuseColour;
+	totalDiff += calcLight(light7, fragPosition, normal, light7radius) * light7Colour * light7intensity * diffuseColour;
+	totalDiff += calcLight(light8, fragPosition, normal, light8radius) * light8Colour * light8intensity * diffuseColour;
 
 	vec4 roughDirect = calcDiffuse(directionalLight, normal) * diffuseColour;
 
