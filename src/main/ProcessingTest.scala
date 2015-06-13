@@ -224,7 +224,7 @@ object ProcessingTest extends PApplet {
   }
   
   def updateStationLights() = {
-    stationLightColor = new Vec4(vMan("station_light_r"), vMan("station_light_b"),vMan("station_light_g"),vMan("station_light_a"))
+    stationLightColor = new Vec4(vMan("station_light_r"), vMan("station_light_g"),vMan("station_light_b"),vMan("station_light_a"))
     stationLightInten = vMan("station_light_intensity")
     stationLightRadius = vMan("station_light_radius")
     
