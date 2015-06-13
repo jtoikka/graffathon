@@ -153,6 +153,8 @@ object ProcessingTest extends PApplet {
   var light7intensity = 4.0f;
   var light8intensity = 4.0f;
   
+  var ambient = Vec3(0.2f, 0.0f, 0.2f)
+  
   var diffuseMultiplier = Vec4(1.0f, 1.0f, 1.0f, 1.0f)
   
   val starfield = util.EntityFactory.createStarfield(
@@ -302,6 +304,7 @@ object ProcessingTest extends PApplet {
     shader.set("specularColour", vMan("specColour_r"), vMan("specColour_g"), vMan("specColour_b"), vMan("specColour_a"))
     shader.set("directionalLight", vMan("directionalLight_x"), vMan("directionalLight_y"), vMan("directionalLight_z"), vMan("directionalLight_w"))
     shader.set("diffuseMultiplier", diffuseMultiplier.x, diffuseMultiplier.y, diffuseMultiplier.z, diffuseMultiplier.w)
+    shader.set("ambient", ambient.x, ambient.y, ambient.z)
   }
   
   def setPointLights(shader: PShader) = {
@@ -340,7 +343,13 @@ object ProcessingTest extends PApplet {
   }
   
   def drawTextureToTexture(textures: Vector[Int], shader: PShader): PImage = {
+//    var gl = gl2.get
+//    gl.glBindFramebuffer(GL.GL_FRAMEBUFFER, framebuffers("first").id)
+//    gl.glDisable(GL.GL_BLEND)
+//    gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
+//    g.BeginDraw()
     ???
+
   }
   
   def drawTextureToScreen(textures: Vector[Int], s: PShader): Unit = {
