@@ -24,6 +24,8 @@ import moonlander.library.Moonlander
 import scala.util.Random
 import util.EntityFactory
 import src.main.Corridor
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
 
 object ProcessingTest extends PApplet {
   val vManVars = Vector[String](
@@ -143,7 +145,6 @@ object ProcessingTest extends PApplet {
   var zFar = 1000.0f
   val h = 600
   val w = 800
-  
   var stationLightPos = Array.tabulate(4)(f => new Vec3(0,0,10))
   var stationLightColor = Vec4(0.2f, 0.0f, 0.2f, 1.0f)
   var stationLightRadius = 1.0f
@@ -178,6 +179,7 @@ object ProcessingTest extends PApplet {
     var test = loadShader("shaders/test.fsh", "shaders/test.vsh")
     var screen = loadShader("shaders/screen.fsh", "shaders/screen.vsh")
     var explosions = loadShader("shaders/explosions.fsh", "shaders/explosions.vsh")
+    var cowSh = loadShader("shaders/cow.fsh", "shaders/cow.vsh")
     screen.set("positionTex", 0)
     screen.set("diffuseTex", 1)
     screen.set("normalTex", 2)
@@ -185,6 +187,7 @@ object ProcessingTest extends PApplet {
     test.set("fraction", 1.0f)
     shaders("test") = test
     shaders("explosions") = explosions
+    shaders("cow") = cowSh
 //    shader
     
     var pgl = beginPGL().asInstanceOf[PJOGL]
@@ -227,6 +230,8 @@ object ProcessingTest extends PApplet {
     g.perspective(toRadians(vMan("fov")), width.toFloat/height.toFloat, zNear, zFar)
   }
   
+  
+  
   override def draw() = {
     update()
     val corridorStuff = corridorFull.map(e => e.getEntities()).fold(Vector[Entity]())(_++_)
@@ -248,12 +253,33 @@ object ProcessingTest extends PApplet {
     gl.glBindTexture(GL.GL_TEXTURE_2D, fbo.textures(0))
     
     explosions.map(_._1).foreach(exp => {
-      explosionShader.set("colour", exp.color.x, exp.color.y, exp.color.z, exp.color.w)
+//      explosionShader.set("colour", exp.color.x, exp.color.y, exp.color.z, exp.color.w)
+//      val sh = createShape(RECT, 0, 0, 0, 0)
+//      
+//      val particles = exp.getEntities()
+//      var vbuffer = ByteBuffer.allocateDirect(particles.length * 4 * 4 * 6).order(ByteOrder.nativeOrder()).asFloatBuffer()
+//      particles.foreach(ent => {
+//        vbuffer.put(ent.position.x - 1);vbuffer.put(ent.position.y + 1);vbuffer.put(ent.position.z);
+//        vbuffer.put(ent.position.x - 1);vbuffer.put(ent.position.y - 1);vbuffer.put(ent.position.z);
+//        vbuffer.put(ent.position.x + 1);vbuffer.put(ent.position.y - 1);vbuffer.put(ent.position.z);
+//        
+//        vbuffer.put(ent.position.x + 1);vbuffer.put(ent.position.y - 1);vbuffer.put(ent.position.z);
+//        vbuffer.put(ent.position.x + 1);vbuffer.put(ent.position.y + 1);vbuffer.put(ent.position.z);
+//        vbuffer.put(ent.position.x - 1);vbuffer.put(ent.position.y + 1);vbuffer.put(ent.position.z);
+//      })
+//      vbuffer.rewind()
+//      
+//      gl.glBindBuffer(GL.GL_ARRAY_BUFFER, arg1)
+      
+//      gl.glVertexPointer(2, GL.GL_FLOAT, 0, vbuffer);
       drawEntities(exp.getEntities(), shaders("explosions"))
     })
 //    drawEntities(explosions.map(f => f._1.getEntities()).foldLeft(Vector[Entity]())(_++_), shaders("explosions"))
 //    unbindFramebuffer(gl)
 //    drawTextureToScreen(framebuffers("explosions").textures, shaders("explosions"))
+    
+    shader(shaders("cow"))
+    drawEntities(Vector(cow), shaders("cow"))
     resetShader
     
   }
