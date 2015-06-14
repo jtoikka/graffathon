@@ -81,7 +81,7 @@ object ProcessingTest extends PApplet {
                "light" + i + "_a"
                )}).flatten
   
-  lazy val vMan = ValueManager( Moonlander.initWithSoundtrack(this, "sound/sound.mp3", 125, 8), vManVars)
+  lazy val vMan = ValueManager( Moonlander.initWithSoundtrack(this, "sound/edit.mp3", 125, 8), vManVars)
   val corridorModels = Vector[String](
       "cor_pipes_small",
       "cor_pilars",
@@ -102,14 +102,16 @@ object ProcessingTest extends PApplet {
   val framebuffers = Map[String, Framebuffer]()
   val textures = Map[String, PImage]()
   
-  val cow = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "cow", None)
+  val cow = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.1f, 0.1f, 0.1f), "cow", None)
   val quad = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "quad", None)
   val particle = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.05f, 0.05f, 0.05f), "particle", None)
   
   val corridorEnts = EntityFactory.createCorridorEntities(corridorModels)
   val corridorSect = new Corridor(corridorEnts,Vec3(0,-1,0))
-  val corridorFull =  Vector.tabulate(100)(f => corridorSect.clone(Vec3(0, -1, f*4)))
+  val corridorFull =  Vector.tabulate(64)(f => corridorSect.clone(Vec3(0, -1, f*4)))
   
+  val entities = Vector[Entity](cow)
+    
   //val corridorFull = Vector.tabulate(100)(f => new Entity(Vec3(0, -1, f*4), Vec3(toRadians(180), 0, 0), Vec3(1, 1, 1), "corridor", None))
   
   var explosions = Map[ParticleEmitter, String](
@@ -164,7 +166,7 @@ object ProcessingTest extends PApplet {
     background(0)
     lights()
     //shapes("teapot") = loadShape("data/teapot.obj")
-    //shapes("cow") = loadShape("data/cow.obj")
+    shapes("cow") = loadShape("data/cow.obj")
     shapes("quad") = loadShape("data/quad.obj")
     shapes("particle") = loadShape("data/particle.obj")
     //shapes("corridor") = loadShape("data/corridor.obj")
@@ -232,7 +234,7 @@ object ProcessingTest extends PApplet {
     val corridorStuff = corridorFull.map(e => e.getEntities()).fold(Vector[Entity]())(_++_)
     var gl = gl2.get
     gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
-    var tex = drawEntitiesToTexture(corridorStuff, shaders("test"))
+    var tex = drawEntitiesToTexture(corridorStuff ++ entities, shaders("test"))
     var fbo = framebuffers("test")
 //    shader(shaders("screen"))
     
@@ -260,7 +262,7 @@ object ProcessingTest extends PApplet {
   
   // For updating logic
   def update() = {
-    
+    updateCow()
     vMan.update()
     explosions.foreach(e => e._1.updateTo(vMan(e._2)))
     
@@ -272,7 +274,10 @@ object ProcessingTest extends PApplet {
     
     //starfield.position = cameraPos
   }
-  
+  def updateCow() {
+    println("moo!")
+    cow.position = new Vec3(0,0, cameraPos.z + 1) //zFar)
+  }
   def updateStationLights() = {
     stationLightColor = new Vec4(vMan("station_light_r"), vMan("station_light_g"),vMan("station_light_b"),vMan("station_light_a"))
     stationLightInten = vMan("station_light_intensity")
