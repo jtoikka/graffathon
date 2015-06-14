@@ -123,6 +123,7 @@ class ProcessingTest extends PApplet {
   val quad = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "quad", None)
   val particle = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.05f, 0.05f, 0.05f), "particle", None)
   val backQuad = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(10f, 10f, 10f), "quad", None)
+  val credits = new Entity(Vec3(3, 3, 252), Vec3(toRadians(-90), 0, 0), Vec3(2, 2, 2), "credits", None)
   
   val corridorEnts = EntityFactory.createCorridorEntities(corridorModels)
   val corridorSect = new Corridor(corridorEnts,Vec3(0,-1,0))
@@ -255,6 +256,7 @@ class ProcessingTest extends PApplet {
     shapes("cow") = loadShape("data/cow.obj")
     shapes("quad") = loadShape("data/quad.obj")
     shapes("particle") = loadShape("data/particle.obj")
+    shapes("credits") = loadShape("data/credits.obj")
     //shapes("corridor") = loadShape("data/corridor.obj")
     
     corridorModels.foreach(s => {
@@ -267,6 +269,7 @@ class ProcessingTest extends PApplet {
     var screen = loadShader("shaders/screen.fsh", "shaders/screen.vsh")
     var explosions = loadShader("shaders/explosions.fsh", "shaders/explosions.vsh")
     var cowSh = loadShader("shaders/cow.fsh", "shaders/cow.vsh")
+    var creditsSh = loadShader("shaders/credits.fsh", "shaders/credits.vsh")
     screen.set("positionTex", 0)
     screen.set("diffuseTex", 1)
     screen.set("normalTex", 2)
@@ -275,6 +278,7 @@ class ProcessingTest extends PApplet {
     shaders("test") = test
     shaders("explosions") = explosions
     shaders("cow") = cowSh
+    shaders("credits") = creditsSh
 //    shader
     
     var pgl = beginPGL().asInstanceOf[PJOGL]
@@ -351,15 +355,12 @@ class ProcessingTest extends PApplet {
 //  }
   
   override def draw() = {
+    var gl = gl2.get
     update()
     val corridorStuff = corridorFull.map(e => e.getEntities()).fold(Vector[Entity]())(_++_)
-    var gl = gl2.get
     gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
     var tex = drawEntitiesToTexture(corridorStuff ++ entities ++ helpers, shaders("test"))
     var fbo = framebuffers("test")
-//    shader(shaders("screen"))
-    
-//    bindFramebuffer("explosions", gl)
     
     shader(shaders("screen"))
     drawTextureToScreen(fbo.textures, shaders("screen"))
@@ -378,15 +379,19 @@ class ProcessingTest extends PApplet {
     
     val cowShader = shaders("cow")
     shader(shaders("cow"))
-    resetShader
+//    resetShader
     if (vMan("slenderCow") > 0.0f) {
       cowShader.set("intensity", vMan("slenderCow"))
       gl.glDisable(GL.GL_DEPTH_TEST)
       drawEntities(entities, shaders("cow"))
       gl.glEnable(GL.GL_DEPTH_TEST)
     }
-    resetShader
     
+    val testSh = shaders("credits")
+    shader(testSh)
+    drawCredits(Vector(credits), testSh)
+    
+    resetShader
   }
   
   // For updating logic
@@ -512,6 +517,19 @@ class ProcessingTest extends PApplet {
     gl.glDepthFunc(GL.GL_LEQUAL)
     gl.glEnable(GL.GL_BLEND)
     unbindFramebuffer(gl)
+    resetShader
+  }
+  
+  def drawCredits(entities: Vector[Entity], shader: PShader): Unit = {
+    var gl = gl2.get
+    g.beginDraw()
+    g.directionalLight(204, 204, 204, -0, -0, -1)
+    setCamera(g)
+    setPerspective(g)
+    g.shader(shader)
+    textureMode(NORMAL)
+    drawEntities(entities) 
+    g.endDraw
     resetShader
   }
   
