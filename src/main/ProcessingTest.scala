@@ -235,7 +235,9 @@ object ProcessingTest extends PApplet {
     g.perspective(toRadians(vMan("fov")), width.toFloat/height.toFloat, zNear, zFar)
   }
   
-  
+  def particleBuffer() = {
+//    val particles = exp.getEntities
+  }
   
   override def draw() = {
     update()
@@ -258,7 +260,7 @@ object ProcessingTest extends PApplet {
     gl.glBindTexture(GL.GL_TEXTURE_2D, fbo.textures(0))
     
     explosions.map(_._1).foreach(exp => {
-//      explosionShader.set("colour", exp.color.x, exp.color.y, exp.color.z, exp.color.w)
+      explosionShader.set("colour", exp.color.x, exp.color.y, exp.color.z, exp.color.w)
 //      val sh = createShape(RECT, 0, 0, 0, 0)
 //      
 //      val particles = exp.getEntities()
