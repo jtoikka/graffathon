@@ -58,9 +58,10 @@
 			<key row="1280" value="98" interpolation="1"/>
 			<key row="1312" value="112.2" interpolation="1"/>
 			<key row="1344" value="114" interpolation="1"/>
-			<key row="2664" value="400" interpolation="1"/>
-			<key row="2728" value="410" interpolation="1"/>
-			<key row="3204" value="500" interpolation="0"/>
+			<key row="2001" value="256.35" interpolation="1"/>
+			<key row="2664" value="300" interpolation="1"/>
+			<key row="2728" value="300" interpolation="1"/>
+			<key row="3204" value="300" interpolation="0"/>
 		</track>
 		<track name="camera_look_x">
 			<key row="24" value="0" interpolation="0"/>
@@ -182,6 +183,31 @@
 		</track>
 		<track name="diffuseIntensity">
 			<key row="0" value="0.8" interpolation="0"/>
+			<key row="1343" value="5" interpolation="0"/>
+			<key row="1345" value="0.8" interpolation="0"/>
+			<key row="1408" value="2" interpolation="0"/>
+			<key row="1409" value="0.8" interpolation="0"/>
+			<key row="1470" value="0.8" interpolation="1"/>
+			<key row="1472" value="1.5" interpolation="1"/>
+			<key row="1474" value="0.8" interpolation="0"/>
+			<key row="1534" value="0.8" interpolation="1"/>
+			<key row="1536" value="1.5" interpolation="1"/>
+			<key row="1538" value="0.8" interpolation="0"/>
+			<key row="1598" value="0.8" interpolation="1"/>
+			<key row="1600" value="1.5" interpolation="1"/>
+			<key row="1602" value="0.8" interpolation="0"/>
+			<key row="1662" value="0.8" interpolation="1"/>
+			<key row="1664" value="1.5" interpolation="1"/>
+			<key row="1666" value="0.8" interpolation="0"/>
+			<key row="1790" value="0.8" interpolation="1"/>
+			<key row="1792" value="1" interpolation="1"/>
+			<key row="1794" value="0.8" interpolation="0"/>
+			<key row="1854" value="0.8" interpolation="1"/>
+			<key row="1856" value="1" interpolation="1"/>
+			<key row="1858" value="0.8" interpolation="0"/>
+			<key row="1918" value="0.8" interpolation="1"/>
+			<key row="1920" value="5" interpolation="1"/>
+			<key row="1928" value="0.8" interpolation="0"/>
 		</track>
 		<track name="exposure">
 			<key row="0" value="15" interpolation="0"/>
@@ -236,6 +262,9 @@
 			<key row="823" value="500" interpolation="0"/>
 			<key row="825" value="0.8" interpolation="1"/>
 			<key row="826" value="7" interpolation="0"/>
+			<key row="1343" value="20" interpolation="0"/>
+			<key row="1345" value="7" interpolation="0"/>
+			<key row="1408" value="7" interpolation="0"/>
 		</track>
 		<track name="specularExponent">
 			<key row="0" value="90" interpolation="0"/>
@@ -398,24 +427,24 @@
 		</track>
 		<track name="station_light_intensity">
 			<key row="0" value="7" interpolation="0"/>
-			<key row="280" value="7" interpolation="1"/>
-			<key row="296" value="5" interpolation="1"/>
-			<key row="312" value="7" interpolation="1"/>
-			<key row="328" value="5" interpolation="1"/>
-			<key row="344" value="7" interpolation="1"/>
-			<key row="360" value="5" interpolation="1"/>
-			<key row="376" value="7" interpolation="1"/>
-			<key row="392" value="5" interpolation="1"/>
-			<key row="408" value="7" interpolation="1"/>
-			<key row="424" value="5" interpolation="1"/>
-			<key row="440" value="7" interpolation="1"/>
-			<key row="456" value="5" interpolation="1"/>
-			<key row="472" value="7" interpolation="1"/>
-			<key row="488" value="5" interpolation="1"/>
-			<key row="504" value="7" interpolation="1"/>
-			<key row="520" value="5" interpolation="1"/>
-			<key row="536" value="7" interpolation="1"/>
-			<key row="552" value="5" interpolation="1"/>
+			<key row="280" value="9" interpolation="1"/>
+			<key row="296" value="3" interpolation="1"/>
+			<key row="312" value="9" interpolation="1"/>
+			<key row="328" value="3" interpolation="1"/>
+			<key row="344" value="9" interpolation="1"/>
+			<key row="360" value="3" interpolation="1"/>
+			<key row="376" value="9" interpolation="1"/>
+			<key row="392" value="3" interpolation="1"/>
+			<key row="408" value="9" interpolation="1"/>
+			<key row="424" value="3" interpolation="1"/>
+			<key row="440" value="9" interpolation="1"/>
+			<key row="456" value="3" interpolation="1"/>
+			<key row="472" value="9" interpolation="1"/>
+			<key row="488" value="3" interpolation="1"/>
+			<key row="504" value="9" interpolation="1"/>
+			<key row="520" value="3" interpolation="1"/>
+			<key row="536" value="9" interpolation="1"/>
+			<key row="552" value="3" interpolation="1"/>
 			<key row="568" value="7" interpolation="1"/>
 			<key row="584" value="5" interpolation="1"/>
 			<key row="600" value="7" interpolation="1"/>
@@ -481,6 +510,7 @@
 			<key row="1280" value="0.5" interpolation="1"/>
 			<key row="1288" value="0.7" interpolation="1"/>
 			<key row="1312" value="0.7" interpolation="1"/>
+			<key row="1328" value="0.5" interpolation="0"/>
 			<key row="1343" value="0.35" interpolation="1"/>
 			<key row="1344" value="0.5" interpolation="1"/>
 		</track>
@@ -514,6 +544,7 @@
 			<key row="1280" value="0.4" interpolation="1"/>
 			<key row="1288" value="0.4" interpolation="1"/>
 			<key row="1312" value="0.4" interpolation="1"/>
+			<key row="1328" value="0.5" interpolation="0"/>
 			<key row="1343" value="0.75" interpolation="1"/>
 			<key row="1344" value="0.4" interpolation="1"/>
 		</track>
@@ -547,8 +578,9 @@
 			<key row="1280" value="0.3" interpolation="1"/>
 			<key row="1288" value="0.3" interpolation="1"/>
 			<key row="1312" value="0.3" interpolation="1"/>
+			<key row="1328" value="0.5" interpolation="0"/>
 			<key row="1343" value="1" interpolation="1"/>
-			<key row="1344" value="0.3" interpolation="1"/>
+			<key row="1344" value="0.4" interpolation="1"/>
 		</track>
 		<track name="diffuseMultiplier_a">
 			<key row="0" value="0.75" interpolation="0"/>
@@ -580,6 +612,7 @@
 			<key row="1280" value="1" interpolation="1"/>
 			<key row="1288" value="1" interpolation="1"/>
 			<key row="1312" value="1" interpolation="1"/>
+			<key row="1328" value="0.75" interpolation="0"/>
 			<key row="1343" value="1" interpolation="1"/>
 			<key row="1344" value="1" interpolation="1"/>
 		</track>
@@ -593,10 +626,6 @@
 			<key row="1473" value="0" interpolation="0"/>
 			<key row="1728" value="2" interpolation="0"/>
 			<key row="1793" value="0" interpolation="0"/>
-		</track>
-		<track name="cow_distance">
-			<key row="0" value="300" interpolation="1"/>
-			<key row="1992" value="4" interpolation="0"/>
 		</track>
 		<track name="pe_005B0h">
 			<key row="1456" value="0" interpolation="1"/>
@@ -612,6 +641,7 @@
 		<track name="pe_005F0h">
 			<key row="1520" value="0" interpolation="1"/>
 			<key row="1552" value="1" interpolation="0"/>
+			<key row="1665" value="0" interpolation="0"/>
 			<key row="1793" value="0" interpolation="0"/>
 		</track>
 		<track name="pe_00600h">
@@ -630,6 +660,7 @@
 			<key row="1600" value="0" interpolation="1"/>
 			<key row="1640" value="1" interpolation="1"/>
 			<key row="1672" value="2" interpolation="0"/>
+			<key row="1921" value="0" interpolation="0"/>
 		</track>
 		<track name="pe_00680h">
 			<key row="1664" value="0" interpolation="1"/>
@@ -641,11 +672,14 @@
 			<key row="1728" value="0" interpolation="1"/>
 			<key row="1768" value="1" interpolation="1"/>
 			<key row="1800" value="2" interpolation="0"/>
+			<key row="1801" value="0" interpolation="0"/>
+			<key row="1921" value="0" interpolation="0"/>
 		</track>
 		<track name="pe_00700h">
 			<key row="1792" value="0" interpolation="1"/>
 			<key row="1832" value="1" interpolation="1"/>
 			<key row="1864" value="2" interpolation="0"/>
+			<key row="1921" value="0" interpolation="0"/>
 		</track>
 		<track name="pe_00780h">
 			<key row="1920" value="0" interpolation="1"/>
@@ -656,6 +690,43 @@
 			<key row="1856" value="0" interpolation="1"/>
 			<key row="1896" value="1" interpolation="1"/>
 			<key row="1928" value="2" interpolation="0"/>
+		</track>
+		<track name="cow_distance">
+			<key row="0" value="30" interpolation="1"/>
+			<key row="1016" value="20" interpolation="0"/>
+			<key row="1168" value="14" interpolation="1"/>
+			<key row="1184" value="13.5" interpolation="1"/>
+			<key row="1224" value="17" interpolation="1"/>
+			<key row="1344" value="16" interpolation="1"/>
+			<key row="1992" value="4" interpolation="0"/>
+		</track>
+		<track name="slenderCow">
+			<key row="557" value="0" interpolation="0"/>
+			<key row="558" value="0.25" interpolation="0"/>
+			<key row="559" value="0" interpolation="0"/>
+			<key row="621" value="0.25" interpolation="0"/>
+			<key row="622" value="0" interpolation="0"/>
+			<key row="800" value="0.5" interpolation="0"/>
+			<key row="801" value="0" interpolation="0"/>
+			<key row="813" value="0.1" interpolation="0"/>
+			<key row="814" value="0" interpolation="1"/>
+			<key row="924" value="0" interpolation="1"/>
+			<key row="928" value="0.1" interpolation="1"/>
+			<key row="932" value="0" interpolation="0"/>
+			<key row="988" value="0" interpolation="1"/>
+			<key row="992" value="0.1" interpolation="1"/>
+			<key row="996" value="0" interpolation="0"/>
+			<key row="1020" value="0" interpolation="1"/>
+			<key row="1024" value="0.1" interpolation="1"/>
+			<key row="1028" value="0" interpolation="0"/>
+			<key row="1343" value="0.5" interpolation="0"/>
+			<key row="1344" value="0.5" interpolation="0"/>
+			<key row="1345" value="0" interpolation="0"/>
+		</track>
+		<track name="pe_end">
+			<key row="2000" value="0" interpolation="1"/>
+			<key row="2056" value="1" interpolation="1"/>
+			<key row="2136" value="2" interpolation="0"/>
 		</track>
 	</tracks>
 	<bookmarks/>
