@@ -40,6 +40,7 @@ object ProcessingTest extends PApplet {
       //"directionalLight_y",
       //"directionalLight_z",
       //"directionalLight_w",
+      "cow_distance",
       "camera_pos_x",
       "camera_pos_y",
       "camera_pos_z",
@@ -102,7 +103,7 @@ object ProcessingTest extends PApplet {
   val framebuffers = Map[String, Framebuffer]()
   val textures = Map[String, PImage]()
   
-  val cow = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.1f, 0.1f, 0.1f), "cow", None)
+  val cow = new Entity(Vec3(0, 0.1f, 0), Vec3(toRadians(180), toRadians(90), 0), Vec3(0.25f, 0.25f, 0.25f), "cow", None)
   val quad = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "quad", None)
   val particle = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.05f, 0.05f, 0.05f), "particle", None)
   
@@ -130,10 +131,10 @@ object ProcessingTest extends PApplet {
       (new ParticleEmitter(Vec3(0.5f, 0, 113f), 500, 50, rand, particle, Vec4(1f, 1f, 1f, 0.5f)), "pe_00540h"),
       (new ParticleEmitter(Vec3(0.6f, 0, 113f), 500, 50, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_00540h"),
       
-      (new ParticleEmitter(Vec3(-0.6f, 0.5f, 126.5f), 500, 50, rand, particle, Vec4(1, 1f, 1f, 0.5f)), "pe_00580h"),
-      (new ParticleEmitter(Vec3(-0.6f, 0, 126.5f), 500, 100, rand, particle, Vec4(1, 0.7f, 0f, 0.5f)), "pe_00580h"),
-      (new ParticleEmitter(Vec3(0.6f, 0.5f, 126.5f), 500, 50, rand, particle, Vec4(1, 1f, 1f, 0.5f)), "pe_00580h"),
-      (new ParticleEmitter(Vec3(0.6f, 0, 126.5f), 500, 100, rand, particle, Vec4(1, 0.7f, 0f, 0.5f)), "pe_00580h")
+      (new ParticleEmitter(Vec3(-0.6f, 0.5f, 125.5f), 500, 50, rand, particle, Vec4(1, 1f, 1f, 0.5f)), "pe_00580h"),
+      (new ParticleEmitter(Vec3(-0.6f, 0, 125.5f), 500, 100, rand, particle, Vec4(1, 0.7f, 0f, 0.5f)), "pe_00580h"),
+      (new ParticleEmitter(Vec3(0.6f, 0.5f, 125.5f), 500, 50, rand, particle, Vec4(1, 1f, 1f, 0.5f)), "pe_00580h"),
+      (new ParticleEmitter(Vec3(0.6f, 0, 125.5f), 500, 100, rand, particle, Vec4(1, 0.7f, 0f, 0.5f)), "pe_00580h")
       )
   
   var cameraPos = Vec3(10, 0, 10)
@@ -143,8 +144,8 @@ object ProcessingTest extends PApplet {
   //var fov = 45.0f
   var zNear = 0.3f
   var zFar = 1000.0f
-  val h = 600
-  val w = 800
+  val h = 720
+  val w = 1280
   
   var stationLightPos = Array.tabulate(4)(f => new Vec3(0,0,10))
   var stationLightColor = Vec4(0.2f, 0.0f, 0.2f, 1.0f)
@@ -275,8 +276,8 @@ object ProcessingTest extends PApplet {
     //starfield.position = cameraPos
   }
   def updateCow() {
-    println("moo!")
-    cow.position = new Vec3(0,0, cameraPos.z + 1) //zFar)
+    //println("moo!")
+    entities(0).position = new Vec3(0, -0.5f, cameraPos.z - vMan("cow_distance")) //zFar)
   }
   def updateStationLights() = {
     stationLightColor = new Vec4(vMan("station_light_r"), vMan("station_light_g"),vMan("station_light_b"),vMan("station_light_a"))
