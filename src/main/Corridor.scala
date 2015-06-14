@@ -1,7 +1,6 @@
 package src.main
 
-import math.Vec3
-import main.Entity
+import src.math.Vec3
 
 
 /**

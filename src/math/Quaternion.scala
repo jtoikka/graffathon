@@ -1,4 +1,4 @@
-package math 
+package src.math 
 
 import scala.math.{sin, cos, sqrt}
 

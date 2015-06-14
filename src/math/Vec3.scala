@@ -1,4 +1,4 @@
-package math
+package src.math
 
 object Vec3 {
   def apply(v: Vec2, f: Float): Vec3 = {

@@ -1,11 +1,11 @@
-package util
-import util.mathUtil._
+package src.util
+import src.util.mathUtil._
 import scala.util.Random
-import math.Vec3
-import main.Vertex
-import main.Vertex
+import src.math.Vec3
+import src.main.Vertex
+import src.main.Vertex
 import scala.collection.mutable.Buffer
-import main.Entity
+import src.main.Entity
 import processing.core.PShape
 
 /**

@@ -1,8 +1,8 @@
-package main
+package src.main
 
 import scala.util.Random
-import math.Vec3
-import math.Vec4
+import src.math.Vec3
+import src.math.Vec4
 
 case class EmitterData(dir: Vec3, rotation: Vec3, distMultiplier: Float){
   

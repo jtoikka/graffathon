@@ -1,6 +1,6 @@
-package main
+package src.main
 
-import math._
+import src.math._
 
 case class Vertex(position: Vec3, normal: Vec3, colour: Vec3, uv: Vec3) {
 //  def toArray = {

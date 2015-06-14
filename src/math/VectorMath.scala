@@ -1,4 +1,4 @@
-package math
+package src.math
 
 /**
   * Translate float * vector to vector * float

@@ -1,4 +1,4 @@
-package math
+package src.math
 
 /**
   * 2 length vector.

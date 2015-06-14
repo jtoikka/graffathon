@@ -1,4 +1,4 @@
-package math
+package src.math
 
 /**
   * Mat3 utility functions.

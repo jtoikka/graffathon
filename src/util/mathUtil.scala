@@ -1,8 +1,9 @@
-package util
+package src.util
 
 import processing.core.PShape
 import processing.core.PVector
-import math.Vec3
+import src.math.Vec3
+
 
 /**
  * @author Toni

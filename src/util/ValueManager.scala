@@ -1,4 +1,4 @@
-package util
+package src.util
 
 import moonlander.library.Moonlander
 import scala.collection.mutable.Map

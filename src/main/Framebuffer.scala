@@ -1,4 +1,4 @@
-package main
+package src.main
 
 import javax.media.opengl.GL2
 import javax.media.opengl.GL

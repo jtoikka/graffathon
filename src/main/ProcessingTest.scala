@@ -1,10 +1,9 @@
-package main
+package src.main
 
 import java.awt.Dimension
 import scala.collection.mutable.Map
 import javax.media.opengl.GL
 import javax.media.opengl.GL2
-import math._
 import processing.core._
 import processing.core.PConstants._
 import processing.opengl._
@@ -13,21 +12,20 @@ import processing.opengl.PJOGL._
 import processing.opengl.PGraphics3D._
 import processing.opengl.PShader._
 import java.awt.Dimension
-import math._
+import src.math._
 import javax.media.opengl.GL2
 import javax.media.opengl.GL
 import scala.collection.mutable.Map
 import java.nio.FloatBuffer
 import javax.media.opengl.GL2GL3
-import util.ValueManager
+import src.util.ValueManager
 import moonlander.library.Moonlander
 import scala.util.Random
-import util.EntityFactory
-import src.main.Corridor
+import src.util.EntityFactory
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
-object ProcessingTest extends PApplet {
+class ProcessingTest extends PApplet {
   val vManVars = Vector[String](
       "specularExponent",
       "specularIntensity",
@@ -123,13 +121,15 @@ object ProcessingTest extends PApplet {
   val cow = new Entity(Vec3(0, 0.1f, 0), Vec3(toRadians(180), toRadians(90), 0), Vec3(0.25f, 0.25f, 0.25f), "cow", None)
   val quad = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "quad", None)
   val particle = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.05f, 0.05f, 0.05f), "particle", None)
+  val backQuad = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(10f, 10f, 10f), "quad", None)
   
   val corridorEnts = EntityFactory.createCorridorEntities(corridorModels)
   val corridorSect = new Corridor(corridorEnts,Vec3(0,-1,0))
   val corridorFull =  Vector.tabulate(64)(f => corridorSect.clone(Vec3(0, -1, f*4)))
   
   val entities = Vector[Entity](cow)
-    
+  val helpers = Vector[Entity](backQuad)
+  
   //val corridorFull = Vector.tabulate(100)(f => new Entity(Vec3(0, -1, f*4), Vec3(toRadians(180), 0, 0), Vec3(1, 1, 1), "corridor", None))
   
   var explosions = Map[ParticleEmitter, String](
@@ -325,7 +325,7 @@ object ProcessingTest extends PApplet {
     val corridorStuff = corridorFull.map(e => e.getEntities()).fold(Vector[Entity]())(_++_)
     var gl = gl2.get
     gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
-    var tex = drawEntitiesToTexture(corridorStuff ++ entities, shaders("test"))
+    var tex = drawEntitiesToTexture(corridorStuff ++ entities ++ helpers, shaders("test"))
     var fbo = framebuffers("test")
 //    shader(shaders("screen"))
     
@@ -388,6 +388,7 @@ object ProcessingTest extends PApplet {
     cameraLookAt = new Vec3(vMan("camera_look_x"), vMan("camera_look_y"),vMan("camera_look_z"))
     cameraUp = new Vec3(vMan("camera_up_x"), vMan("camera_up_y"),vMan("camera_up_z"))
     updateCow()
+    backQuad.position = new Vec3(0,0, cameraPos.z - 200)
     updateStationLights()
     
     //starfield.position = cameraPos

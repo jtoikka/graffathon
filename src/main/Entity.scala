@@ -1,6 +1,6 @@
-package main
+package src.main
 
-import math._
+import src.math._
 class Entity(
     var position: Vec3, 
     var rotation: Vec3, 
