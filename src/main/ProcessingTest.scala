@@ -55,6 +55,20 @@ object ProcessingTest extends PApplet {
       "pe_00520h",
       "pe_00540h",
       "pe_00580h",
+      
+      "pe_005B0h",
+      "pe_005C0h",
+      "pe_005F0h",
+      "pe_00600h",
+      "pe_00620h",
+      "pe_00640h",
+      "pe_00680h",
+      "pe_006C0h",
+      "pe_00700h",
+      "pe_00740h",
+      "pe_00780h",
+      "pe_end",
+      
       "station_light_r",
       "station_light_b",
       "station_light_g",
@@ -131,10 +145,77 @@ object ProcessingTest extends PApplet {
       (new ParticleEmitter(Vec3(0.5f, 0, 113f), 500, 50, rand, particle, Vec4(1f, 1f, 1f, 0.5f)), "pe_00540h"),
       (new ParticleEmitter(Vec3(0.6f, 0, 113f), 500, 50, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_00540h"),
       
-      (new ParticleEmitter(Vec3(-0.6f, 0.5f, 125.5f), 500, 50, rand, particle, Vec4(1, 1f, 1f, 0.5f)), "pe_00580h"),
-      (new ParticleEmitter(Vec3(-0.6f, 0, 125.5f), 500, 100, rand, particle, Vec4(1, 0.7f, 0f, 0.5f)), "pe_00580h"),
-      (new ParticleEmitter(Vec3(0.6f, 0.5f, 125.5f), 500, 50, rand, particle, Vec4(1, 1f, 1f, 0.5f)), "pe_00580h"),
-      (new ParticleEmitter(Vec3(0.6f, 0, 125.5f), 500, 100, rand, particle, Vec4(1, 0.7f, 0f, 0.5f)), "pe_00580h")
+      (new ParticleEmitter(Vec3(-0.6f, 0.5f, 125.5f), 500, 50, rand, particle, Vec4(1, 0.5f, 0f, 0.5f)), "pe_00580h"),
+      (new ParticleEmitter(Vec3(-0.6f, 0, 125.5f), 500, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_00580h"),
+      (new ParticleEmitter(Vec3(0.6f, 0.5f, 125.5f), 500, 50, rand, particle, Vec4(1, 0.5f, 0f, 0.5f)), "pe_00580h"),
+      (new ParticleEmitter(Vec3(0.6f, 0, 125.5f), 500, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_00580h"),
+      
+      (new ParticleEmitter(Vec3(-2f, 0, 137f), 250, 100, rand, particle, Vec4(1, 0.5f, 0f, 0.5f)), "pe_005B0h"),
+      (new ParticleEmitter(Vec3(-2f, 0, 137f), 250, 100, rand, particle, Vec4(1, 1f, 1f, 1f), -0.01f), "pe_005B0h"),
+      (new ParticleEmitter(Vec3(2f, 0, 137f), 250, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_005B0h"),
+      (new ParticleEmitter(Vec3(2f, 0, 137f), 250, 100, rand, particle, Vec4(1, 0.5f, 0f, 0.5f), -0.01f), "pe_005B0h"),
+      
+      (new ParticleEmitter(Vec3(-2f, 0, 140f), 250, 100, rand, particle, Vec4(1, 0.5f, 0f, 0.5f),-0.3f), "pe_005C0h"),
+      (new ParticleEmitter(Vec3(-2.5f, 0, 140f), 250, 100, rand, particle, Vec4(1, 0.5f, 0f, 0.5f)), "pe_005C0h"),
+      (new ParticleEmitter(Vec3(-2f, 0, 140f), 250, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_005C0h"),
+      (new ParticleEmitter(Vec3(-2f, 0, 140f), 250, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f),-0.2f), "pe_005C0h"),
+      (new ParticleEmitter(Vec3(2f, 0, 140f), 250, 100, rand, particle, Vec4(1, 0.5f, 0f, 0.5f),-0.3f), "pe_005C0h"),
+      (new ParticleEmitter(Vec3(2.5f, 0, 140f), 250, 100, rand, particle, Vec4(1, 0.5f, 0f, 0.5f)), "pe_005C0h"),
+      (new ParticleEmitter(Vec3(2f, 0, 140f), 250, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_005C0h"),
+      (new ParticleEmitter(Vec3(2f, 0, 140f), 250, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f),-0.2f), "pe_005C0h"),
+      
+      (new ParticleEmitter(Vec3(-3f, 1, 150f), 500, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f),-0.1f), "pe_005F0h"),
+      (new ParticleEmitter(Vec3(-1.5f, 1, 150f), 500, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f),-0.2f), "pe_005F0h"),
+      (new ParticleEmitter(Vec3(1.5f, 1, 150f), 500, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f),-0.3f), "pe_005F0h"),
+      (new ParticleEmitter(Vec3(3f, 1, 150f), 500, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f),-0.4f), "pe_005F0h"),
+         
+      
+      (new ParticleEmitter(Vec3(-2f, 0, 154f), 250, 100, rand, particle, Vec4(1, 0.5f, 0f, 0.5f),-0.3f), "pe_00600h"),
+      (new ParticleEmitter(Vec3(-2.5f, 0, 154f), 250, 100, rand, particle, Vec4(1, 0.5f, 0f, 0.5f)), "pe_00600h"),
+      (new ParticleEmitter(Vec3(-2f, 0, 154f), 250, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_00600h"),
+      (new ParticleEmitter(Vec3(-2f, 0, 154f), 250, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f),-0.2f), "pe_00600h"),
+      (new ParticleEmitter(Vec3(2f, 0, 154f), 250, 100, rand, particle, Vec4(1, 0.5f, 0f, 0.5f),-0.3f), "pe_00600h"),
+      (new ParticleEmitter(Vec3(2.5f, 0, 154f), 250, 100, rand, particle, Vec4(1, 0.5f, 0f, 0.5f)), "pe_00600h"),
+      (new ParticleEmitter(Vec3(2f, 0, 154f), 250, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_00600h"),
+      (new ParticleEmitter(Vec3(2f, 0, 154f), 250, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f),-0.2f), "pe_00600h"),
+      
+      (new ParticleEmitter(Vec3(-2f, 0, 161f), 500, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_00620h"),
+      
+      (new ParticleEmitter(Vec3(1f, 0, 167f), 250, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f),-0.25f), "pe_00640h"),
+      (new ParticleEmitter(Vec3(0f, 1f, 167f), 250, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f),-0.50f), "pe_00640h"),
+      (new ParticleEmitter(Vec3(-1f, 0, 167f), 250, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f),-0.75f), "pe_00640h"),
+      (new ParticleEmitter(Vec3(0f, -1f, 167f), 250, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f),-1f), "pe_00640h"),
+      
+      (new ParticleEmitter(Vec3(-2f, 0, 182f), 250, 100, rand, particle, Vec4(1, 0.5f, 0f, 0.5f)), "pe_00680h"),
+      (new ParticleEmitter(Vec3(-2f, 0, 182f), 250, 100, rand, particle, Vec4(1, 0.5f, 0f, 0.5f), -0.01f), "pe_00680h"),
+      (new ParticleEmitter(Vec3(2f, 0, 182f), 250, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_00680h"),
+      (new ParticleEmitter(Vec3(2f, 0, 182f), 250, 100, rand, particle, Vec4(1, 0.5f, 0f, 0.5f), -0.01f), "pe_00680h"),
+      
+      (new ParticleEmitter(Vec3(1f, 0, 195f), 250, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f),-0.1f), "pe_006C0h"),
+      (new ParticleEmitter(Vec3(0f, 1f, 195f), 250, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f),-0.2f), "pe_006C0h"),
+      (new ParticleEmitter(Vec3(-1f, 0, 195f), 250, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f),-0.3f), "pe_006C0h"),
+      (new ParticleEmitter(Vec3(0f, -1f, 195f), 250, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f),-0.4f), "pe_006C0h"),
+      
+      (new ParticleEmitter(Vec3(0f, 0, 208f), 500, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_00700h"),
+      
+      (new ParticleEmitter(Vec3(0f, 0, 222f), 500, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_00740h"),
+      
+      (new ParticleEmitter(Vec3(-0.3f, 0, 238f), 500, 50, rand, particle, Vec4(1, 0.5f, 0f, 0.5f)), "pe_00780h"),
+      (new ParticleEmitter(Vec3(-0.5f, 0, 238f), 500, 50, rand, particle, Vec4(1f, 1f, 1f, 0.5f)), "pe_00780h"),
+      (new ParticleEmitter(Vec3(-0.6f, 0, 238f), 500, 50, rand, particle, Vec4(1, 1f, 0f, 0.5f)), "pe_00780h"),
+      
+      (new ParticleEmitter(Vec3(0.3f, 0, 238f), 500, 50, rand, particle, Vec4(1, 0.5f, 0f, 0.5f)), "pe_00780h"),
+      (new ParticleEmitter(Vec3(0.5f, 0, 238f), 500, 50, rand, particle, Vec4(1f, 1f, 1f, 0.5f)), "pe_00780h"),
+      (new ParticleEmitter(Vec3(0.6f, 0, 238f), 500, 50, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_00780h"),
+      
+           (new ParticleEmitter(Vec3(-0.3f, 0, 238f), 500, 50, rand, particle, Vec4(1, 0.5f, 0f, 0.5f)), "pe_00780h"),
+      (new ParticleEmitter(Vec3(-0.5f, 0, 238f), 500, 50, rand, particle, Vec4(1f, 1f, 1f, 0.5f)), "pe_00780h"),
+      (new ParticleEmitter(Vec3(-0.6f, 0, 238f), 500, 50, rand, particle, Vec4(1, 1f, 0f, 0.5f)), "pe_00780h"),
+      
+      (new ParticleEmitter(Vec3(0.3f, 0, 238f), 500, 50, rand, particle, Vec4(1, 0.5f, 0f, 0.5f)), "pe_end"),
+      (new ParticleEmitter(Vec3(0.5f, 0, 238f), 500, 50, rand, particle, Vec4(1f, 1f, 1f, 0.5f)), "pe_end"),
+      (new ParticleEmitter(Vec3(0.6f, 0, 238f), 500, 50, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_end")
+      
       )
   
   var cameraPos = Vec3(10, 0, 10)
@@ -144,8 +225,8 @@ object ProcessingTest extends PApplet {
   //var fov = 45.0f
   var zNear = 0.3f
   var zFar = 1000.0f
-  val h = 720
-  val w = 1280
+  val h = 720/2
+  val w = 1280/2
   
   var stationLightPos = Array.tabulate(4)(f => new Vec3(0,0,10))
   var stationLightColor = Vec4(0.2f, 0.0f, 0.2f, 1.0f)
@@ -263,7 +344,7 @@ object ProcessingTest extends PApplet {
   
   // For updating logic
   def update() = {
-    updateCow()
+    
     vMan.update()
     explosions.foreach(e => e._1.updateTo(vMan(e._2)))
     
@@ -271,13 +352,15 @@ object ProcessingTest extends PApplet {
     cameraPos = new Vec3(vMan("camera_pos_x"), vMan("camera_pos_y"),vMan("camera_pos_z"))
     cameraLookAt = new Vec3(vMan("camera_look_x"), vMan("camera_look_y"),vMan("camera_look_z"))
     cameraUp = new Vec3(vMan("camera_up_x"), vMan("camera_up_y"),vMan("camera_up_z"))
+    updateCow()
     updateStationLights()
     
     //starfield.position = cameraPos
   }
   def updateCow() {
     //println("moo!")
-    entities(0).position = new Vec3(0, -0.5f, cameraPos.z - vMan("cow_distance")) //zFar)
+    val z = cameraPos.z - vMan("cow_distance")
+    entities(0).position = new Vec3(0, -0.5f, if(z > 250) 250f else z) //zFar)
   }
   def updateStationLights() = {
     stationLightColor = new Vec4(vMan("station_light_r"), vMan("station_light_g"),vMan("station_light_b"),vMan("station_light_a"))
