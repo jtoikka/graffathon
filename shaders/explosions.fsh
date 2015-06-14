@@ -3,9 +3,9 @@ precision mediump float;
 precision mediump int;
 #endif
 
-#define PROCESSING_TEXLIGHT_SHADER
+// #define PROCESSING_TEXLIGHT_SHADER
 
-uniform float fraction;
+// uniform float fraction;
 
 uniform sampler2D depthTex;
 

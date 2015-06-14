@@ -322,32 +322,6 @@ class ProcessingTest extends PApplet {
   
   val vbos = ArrayBuffer[Int]()
   
-//  def particleBuffer(exp: ParticleEmitter, i: Int, gl: GL2) = {
-//    val particles = exp.getEntities
-//    particles.flatMap(ent => {
-//      val pos = ent.position
-//      val a = pos + pointA
-//      val b = pos + pointB
-//      val c = pos + pointC
-//      val d = pos + pointD
-//      Vector(
-//        a.x, a.y, a.z,
-//        b.x, b.y, b.z,
-//        c.x, c.y, c.z,
-//        
-//        c.x, c.y, c.z,
-//        d.x, d.y, d.z,
-//        a.x, a.y, a.z
-//      )
-//    })
-//    if (!(vbos.length > i)) {
-//      var index = Array[Int]()
-//      gl.glGenBuffers(1, index, 0)
-//      vbos(i) = index(0)
-//    }
-//    gl.glBindBuffer()
-//  }
-  
   override def draw() = {
     update()
     val corridorStuff = corridorFull.map(e => e.getEntities()).fold(Vector[Entity]())(_++_)
@@ -360,15 +334,11 @@ class ProcessingTest extends PApplet {
     drawTextureToScreen(fbo.textures, shaders("screen"))
     
     val explosionShader = shaders("explosions")
-    explosionShader.set("depthTex", 0)
+//    explosionShader.set("depthTex", 0)
     shader(explosionShader)
-    
-//    gl.glActiveTexture(GL.GL_TEXTURE0)
-//    gl.glBindTexture(GL.GL_TEXTURE_2D, fbo.textures(0))
     
     explosions.map(_._1).foreach(exp => {
       explosionShader.set("colour", exp.color.x, exp.color.y, exp.color.z, exp.color.w)
-
       drawEntities(exp.getEntities(), shaders("explosions"))
     })
     
