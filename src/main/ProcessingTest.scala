@@ -123,7 +123,7 @@ class ProcessingTest extends PApplet {
   val quad = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "quad", None)
   val particle = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.05f, 0.05f, 0.05f), "particle", None)
   val backQuad = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(10f, 10f, 10f), "quad", None)
-  val credits = new Entity(Vec3(3, 3, 252), Vec3(toRadians(-90), 0, 0), Vec3(2, 2, 2), "credits", None)
+  val credits = new Entity(Vec3(2, 2, 262), Vec3(toRadians(-90), 0, 0), Vec3(2, 2, 2), "credits", None)
   
   val corridorEnts = EntityFactory.createCorridorEntities(corridorModels)
   val corridorSect = new Corridor(corridorEnts,Vec3(0,-1,0))
