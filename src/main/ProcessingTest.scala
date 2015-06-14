@@ -359,27 +359,27 @@ class ProcessingTest extends PApplet {
     shader(shaders("screen"))
     drawTextureToScreen(fbo.textures, shaders("screen"))
     
-//    val explosionShader = shaders("explosions")
-//    explosionShader.set("depthTex", 0)
-//    shader(explosionShader)
-//    
-////    gl.glActiveTexture(GL.GL_TEXTURE0)
-////    gl.glBindTexture(GL.GL_TEXTURE_2D, fbo.textures(0))
-//    
-//    explosions.map(_._1).foreach(exp => {
-//      explosionShader.set("colour", exp.color.x, exp.color.y, exp.color.z, exp.color.w)
-//
-//      drawEntities(exp.getEntities(), shaders("explosions"))
-//    })
-//    
-//    val cowShader = shaders("cow")
-//    shader(shaders("cow"))
-//    if (vMan("slenderCow") > 0.0f) {
-//      cowShader.set("intensity", vMan("slenderCow"))
-//      gl.glDisable(GL.GL_DEPTH_TEST)
-//      drawEntities(entities, shaders("cow"))
-//      gl.glEnable(GL.GL_DEPTH_TEST)
-//    }
+    val explosionShader = shaders("explosions")
+    explosionShader.set("depthTex", 0)
+    shader(explosionShader)
+    
+//    gl.glActiveTexture(GL.GL_TEXTURE0)
+//    gl.glBindTexture(GL.GL_TEXTURE_2D, fbo.textures(0))
+    
+    explosions.map(_._1).foreach(exp => {
+      explosionShader.set("colour", exp.color.x, exp.color.y, exp.color.z, exp.color.w)
+
+      drawEntities(exp.getEntities(), shaders("explosions"))
+    })
+    
+    val cowShader = shaders("cow")
+    shader(shaders("cow"))
+    if (vMan("slenderCow") > 0.0f) {
+      cowShader.set("intensity", vMan("slenderCow"))
+      gl.glDisable(GL.GL_DEPTH_TEST)
+      drawEntities(entities, shaders("cow"))
+      gl.glEnable(GL.GL_DEPTH_TEST)
+    }
     
     val testSh = shaders("credits")
     shader(testSh)
