@@ -24,6 +24,7 @@ import scala.util.Random
 import src.util.EntityFactory
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
+import scala.collection.mutable.ArrayBuffer
 
 class ProcessingTest extends PApplet {
   val vManVars = Vector[String](
@@ -316,9 +317,38 @@ class ProcessingTest extends PApplet {
     g.perspective(toRadians(vMan("fov")), width.toFloat/height.toFloat, zNear, zFar)
   }
   
-  def particleBuffer() = {
+  val pointA = Vec3(-1, 1, 0)
+  val pointB = Vec3(-1, -1, 0)
+  val pointC = Vec3(1, -1, 0)
+  val pointD = Vec3(1, 1, 0)
+  
+  val vbos = ArrayBuffer[Int]()
+  
+//  def particleBuffer(exp: ParticleEmitter, i: Int, gl: GL2) = {
 //    val particles = exp.getEntities
-  }
+//    particles.flatMap(ent => {
+//      val pos = ent.position
+//      val a = pos + pointA
+//      val b = pos + pointB
+//      val c = pos + pointC
+//      val d = pos + pointD
+//      Vector(
+//        a.x, a.y, a.z,
+//        b.x, b.y, b.z,
+//        c.x, c.y, c.z,
+//        
+//        c.x, c.y, c.z,
+//        d.x, d.y, d.z,
+//        a.x, a.y, a.z
+//      )
+//    })
+//    if (!(vbos.length > i)) {
+//      var index = Array[Int]()
+//      gl.glGenBuffers(1, index, 0)
+//      vbos(i) = index(0)
+//    }
+//    gl.glBindBuffer()
+//  }
   
   override def draw() = {
     update()
@@ -342,33 +372,15 @@ class ProcessingTest extends PApplet {
     
     explosions.map(_._1).foreach(exp => {
       explosionShader.set("colour", exp.color.x, exp.color.y, exp.color.z, exp.color.w)
-//      val sh = createShape(RECT, 0, 0, 0, 0)
-//      
-//      val particles = exp.getEntities()
-//      var vbuffer = ByteBuffer.allocateDirect(particles.length * 4 * 4 * 6).order(ByteOrder.nativeOrder()).asFloatBuffer()
-//      particles.foreach(ent => {
-//        vbuffer.put(ent.position.x - 1);vbuffer.put(ent.position.y + 1);vbuffer.put(ent.position.z);
-//        vbuffer.put(ent.position.x - 1);vbuffer.put(ent.position.y - 1);vbuffer.put(ent.position.z);
-//        vbuffer.put(ent.position.x + 1);vbuffer.put(ent.position.y - 1);vbuffer.put(ent.position.z);
-//        
-//        vbuffer.put(ent.position.x + 1);vbuffer.put(ent.position.y - 1);vbuffer.put(ent.position.z);
-//        vbuffer.put(ent.position.x + 1);vbuffer.put(ent.position.y + 1);vbuffer.put(ent.position.z);
-//        vbuffer.put(ent.position.x - 1);vbuffer.put(ent.position.y + 1);vbuffer.put(ent.position.z);
-//      })
-//      vbuffer.rewind()
-//      
-//      gl.glBindBuffer(GL.GL_ARRAY_BUFFER, arg1)
-      
-//      gl.glVertexPointer(2, GL.GL_FLOAT, 0, vbuffer);
+
       drawEntities(exp.getEntities(), shaders("explosions"))
     })
-//    drawEntities(explosions.map(f => f._1.getEntities()).foldLeft(Vector[Entity]())(_++_), shaders("explosions"))
-//    unbindFramebuffer(gl)
-//    drawTextureToScreen(framebuffers("explosions").textures, shaders("explosions"))
     
+    val cowShader = shaders("cow")
     shader(shaders("cow"))
     resetShader
-    if (vMan("slenderCow") == 1.0f) {
+    if (vMan("slenderCow") > 0.0f) {
+      cowShader.set("intensity", vMan("slenderCow"))
       gl.glDisable(GL.GL_DEPTH_TEST)
       drawEntities(entities, shaders("cow"))
       gl.glEnable(GL.GL_DEPTH_TEST)
