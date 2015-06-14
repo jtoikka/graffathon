@@ -327,6 +327,8 @@ class ProcessingTest extends PApplet {
     val corridorStuff = corridorFull.map(e => e.getEntities()).fold(Vector[Entity]())(_++_)
     var gl = gl2.get
     gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
+    gl.glDepthFunc(GL.GL_LEQUAL)
+    gl.glEnable(GL.GL_BLEND)
     var tex = drawEntitiesToTexture(corridorStuff ++ entities ++ helpers, shaders("test"))
     var fbo = framebuffers("test")
     
@@ -470,7 +472,7 @@ class ProcessingTest extends PApplet {
   
   def drawEntitiesToTexture(entities: Vector[Entity], shader: PShader): Unit = {
     var gl = gl2.get
-    bindFramebuffer("test", gl)
+    gl.glBindFramebuffer(GL.GL_FRAMEBUFFER, framebuffers("test").id)
     gl.glDisable(GL.GL_BLEND)
     gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
     g.beginDraw()
@@ -483,7 +485,8 @@ class ProcessingTest extends PApplet {
     g.endDraw
     gl.glDepthFunc(GL.GL_LEQUAL)
     gl.glEnable(GL.GL_BLEND)
-    unbindFramebuffer(gl)
+    gl.glBindFramebuffer(GL.GL_FRAMEBUFFER, 0)
+    gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
     resetShader
   }
   
