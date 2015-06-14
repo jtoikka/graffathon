@@ -201,9 +201,9 @@ class ProcessingTest extends PApplet {
       (new ParticleEmitter(Vec3(-1f, 0, 195f), 250, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f),-0.3f), "pe_006C0h"),
       (new ParticleEmitter(Vec3(0f, -1f, 195f), 250, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f),-0.4f), "pe_006C0h"),
       
-      (new ParticleEmitter(Vec3(0f, 0, 208f), 500, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_00700h"),
+      (new ParticleEmitter(Vec3(0f, 0, 208f), 500, 100, rand, particle, Vec4(1f, 1f, 0f, 0.75f)), "pe_00700h"),
       
-      (new ParticleEmitter(Vec3(0f, 0, 222f), 500, 100, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_00740h"),
+      (new ParticleEmitter(Vec3(0f, 0, 222f), 500, 100, rand, particle, Vec4(1, 0.5f, 0f, 0.5f)), "pe_00740h"),
       
       (new ParticleEmitter(Vec3(-0.3f, 0, 238f), 500, 50, rand, particle, Vec4(1, 0.5f, 0f, 0.5f)), "pe_00780h"),
       (new ParticleEmitter(Vec3(-0.5f, 0, 238f), 500, 50, rand, particle, Vec4(1f, 1f, 1f, 0.5f)), "pe_00780h"),
@@ -217,9 +217,9 @@ class ProcessingTest extends PApplet {
       (new ParticleEmitter(Vec3(-0.5f, 0, 238f), 500, 50, rand, particle, Vec4(1f, 1f, 1f, 0.5f)), "pe_00780h"),
       (new ParticleEmitter(Vec3(-0.6f, 0, 238f), 500, 50, rand, particle, Vec4(1, 1f, 0f, 0.5f)), "pe_00780h"),
       
-      (new ParticleEmitter(Vec3(0.3f, 0, 238f), 500, 50, rand, particle, Vec4(1, 0.5f, 0f, 0.5f)), "pe_end"),
-      (new ParticleEmitter(Vec3(0.5f, 0, 238f), 500, 50, rand, particle, Vec4(1f, 1f, 1f, 0.5f)), "pe_end"),
-      (new ParticleEmitter(Vec3(0.6f, 0, 238f), 500, 50, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_end")
+      (new ParticleEmitter(Vec3(0.0f, 0, 252f), 500, 50, rand, particle, Vec4(1, 0.5f, 0f, 0.7f)), "pe_end"),
+      (new ParticleEmitter(Vec3(0.0f, 0, 252f), 500, 50, rand, particle, Vec4(1f, 1f, 1f, 0.7f)), "pe_end"),
+      (new ParticleEmitter(Vec3(0.0f, 0, 252f), 500, 50, rand, particle, Vec4(1f, 1f, 0f, 0.7f)), "pe_end")
       
       )
   
@@ -230,8 +230,8 @@ class ProcessingTest extends PApplet {
   //var fov = 45.0f
   var zNear = 0.3f
   var zFar = 1000.0f
-  val h = 720/2
-  val w = 1280/2
+  val h = 720
+  val w = 1280
   
   var stationLightPos = Array.tabulate(4)(f => new Vec3(0,0,10))
   var stationLightColor = Vec4(0.2f, 0.0f, 0.2f, 1.0f)
@@ -405,7 +405,8 @@ class ProcessingTest extends PApplet {
     cameraLookAt = new Vec3(vMan("camera_look_x"), vMan("camera_look_y"),vMan("camera_look_z"))
     cameraUp = new Vec3(vMan("camera_up_x"), vMan("camera_up_y"),vMan("camera_up_z"))
     updateCow()
-    backQuad.position = new Vec3(0,0, cameraPos.z - 200)
+    backQuad.position = new Vec3(0,0, if(cameraPos.z > -252 ) cameraPos.z - 200 else 1000000)
+    
     updateStationLights()
     
     //starfield.position = cameraPos
@@ -415,6 +416,7 @@ class ProcessingTest extends PApplet {
     val z = cameraPos.z - vMan("cow_distance")
     entities(0).position = new Vec3(0, -0.5f, if(z > 250) 250f else z) //zFar)
   }
+  
   def updateStationLights() = {
     stationLightColor = new Vec4(vMan("station_light_r"), vMan("station_light_g"),vMan("station_light_b"),vMan("station_light_a"))
     stationLightInten = vMan("station_light_intensity")
@@ -424,6 +426,7 @@ class ProcessingTest extends PApplet {
       var pos = stationLightPos(i)
       var z1 = ((-cameraPos.z - 2 + 4*i)/ 4f).toInt * 4
       z1 = if(z1 > -1) 1000 else z1
+      z1 = if(z1 < -252 && i == 3 ) -252 else z1
       stationLightPos(i) = Vec3(0,0, z1)// + stationLightCameraOffset + Vec3(0,0,-sectionLength*i)
 
     }
