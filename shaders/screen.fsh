@@ -126,9 +126,9 @@ float luma(vec3 rgb) {
     return rgb.g * 0.7152 + rgb.r * 0.2198;
 }
 
-float calcExposure(vec4 diffuse, float exp) {
+float calcExposure(vec4 diffuse, float expon) {
     float luminance = luma(diffuse.rgb);
-    float brightness = 1.0 - (exp((exp) * -luma(diffuse.xyz)));
+    float brightness = 1.0 - (exp((expon) * -luma(diffuse.xyz)));
 
     return brightness;
 }
@@ -185,8 +185,8 @@ void main() {
 	vec4 spec = calculateSpecular(directionalLight, fixedNormal, specularIntensity);
 
 	vec4 shaded = ((diffuseIntensity * totalDiff) + spec + vec4(ambient, 1.0)) * depthShifted;// * depthShifted;
-	float exp = calcExposure(shaded, exposure);
-	shaded *= exp;
+	float expon = calcExposure(shaded, exposure);
+	shaded *= expon;
 
 	gl_FragColor = vec4(shaded.xyz, diffuseColour.a); //vec4(shaded.xyz, 1.0);
 }
