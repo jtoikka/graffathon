@@ -362,8 +362,8 @@ class ProcessingTest extends PApplet {
     explosionShader.set("depthTex", 0)
     shader(explosionShader)
     
-    gl.glActiveTexture(GL.GL_TEXTURE0)
-    gl.glBindTexture(GL.GL_TEXTURE_2D, fbo.textures(0))
+//    gl.glActiveTexture(GL.GL_TEXTURE0)
+//    gl.glBindTexture(GL.GL_TEXTURE_2D, fbo.textures(0))
     
     explosions.map(_._1).foreach(exp => {
       explosionShader.set("colour", exp.color.x, exp.color.y, exp.color.z, exp.color.w)
@@ -373,7 +373,6 @@ class ProcessingTest extends PApplet {
     
     val cowShader = shaders("cow")
     shader(shaders("cow"))
-//    resetShader
     if (vMan("slenderCow") > 0.0f) {
       cowShader.set("intensity", vMan("slenderCow"))
       gl.glDisable(GL.GL_DEPTH_TEST)
