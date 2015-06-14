@@ -24,5 +24,9 @@ void main() {
 	vec2 uv = vec2((posdiv.x + 1.0) * 0.5, (posdiv.y + 1.0) * 0.5);
 	float baseDepth = unpackFloatFromVec4i(texture2D(depthTex, uv)) * 1000.0;
 	if (pos.z > baseDepth) discard;
-  gl_FragColor = colour;
+	float depthShifted = 1.0 - baseDepth * 50.0 / 1000.0;
+	depthShifted = clamp(depthShifted, 0.0, 1.0);
+	gl_FragColor = colour;
+	if (baseDepth < 1000.0)//|| (baseDepth >= 1000.0 && (uv.x < 0.4 || uv.x > 0.6)))
+  	gl_FragColor = colour * depthShifted;
 }
