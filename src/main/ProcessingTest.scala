@@ -211,7 +211,7 @@ object ProcessingTest extends PApplet {
       (new ParticleEmitter(Vec3(0.5f, 0, 238f), 500, 50, rand, particle, Vec4(1f, 1f, 1f, 0.5f)), "pe_00780h"),
       (new ParticleEmitter(Vec3(0.6f, 0, 238f), 500, 50, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_00780h"),
       
-           (new ParticleEmitter(Vec3(-0.3f, 0, 238f), 500, 50, rand, particle, Vec4(1, 0.5f, 0f, 0.5f)), "pe_00780h"),
+      (new ParticleEmitter(Vec3(-0.3f, 0, 238f), 500, 50, rand, particle, Vec4(1, 0.5f, 0f, 0.5f)), "pe_00780h"),
       (new ParticleEmitter(Vec3(-0.5f, 0, 238f), 500, 50, rand, particle, Vec4(1f, 1f, 1f, 0.5f)), "pe_00780h"),
       (new ParticleEmitter(Vec3(-0.6f, 0, 238f), 500, 50, rand, particle, Vec4(1, 1f, 0f, 0.5f)), "pe_00780h"),
       
