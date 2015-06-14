@@ -274,7 +274,6 @@ class ProcessingTest extends PApplet {
     screen.set("diffuseTex", 1)
     screen.set("normalTex", 2)
     shaders("screen") = screen
-    test.set("fraction", 1.0f)
     shaders("test") = test
     shaders("explosions") = explosions
     shaders("cow") = cowSh
@@ -300,11 +299,6 @@ class ProcessingTest extends PApplet {
               (GL.GL_COLOR_ATTACHMENT0 + 1, GL.GL_RGBA),
               (GL.GL_COLOR_ATTACHMENT0 + 2, GL.GL_RGB)), gl2.get, true)
     
-    framebuffers("explosions") = 
-      new Framebuffer(
-          width, height,
-          Vector((GL.GL_COLOR_ATTACHMENT0, GL.GL_RGBA)),
-          gl2.get, false)
   }
   
   def toRadians(degrees: Float): Float = {
