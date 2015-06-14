@@ -42,6 +42,7 @@ object ProcessingTest extends PApplet {
       //"directionalLight_y",
       //"directionalLight_z",
       //"directionalLight_w",
+      "cow_distance",
       "camera_pos_x",
       "camera_pos_y",
       "camera_pos_z",
@@ -69,7 +70,8 @@ object ProcessingTest extends PApplet {
       "diffuseMultiplier_g",
       "diffuseMultiplier_b",
       "diffuseMultiplier_a",
-      "fov"
+      "fov",
+      "slenderCow"
       ) ++ (for(i <- 5 to 8) yield{
            Vector(
                "light" + i + "_x",
@@ -83,7 +85,7 @@ object ProcessingTest extends PApplet {
                "light" + i + "_a"
                )}).flatten
   
-  lazy val vMan = ValueManager( Moonlander.initWithSoundtrack(this, "sound/sound.mp3", 125, 8), vManVars)
+  lazy val vMan = ValueManager( Moonlander.initWithSoundtrack(this, "sound/edit.mp3", 125, 8), vManVars)
   val corridorModels = Vector[String](
       "cor_pipes_small",
       "cor_pilars",
@@ -104,14 +106,16 @@ object ProcessingTest extends PApplet {
   val framebuffers = Map[String, Framebuffer]()
   val textures = Map[String, PImage]()
   
-  val cow = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "cow", None)
+  val cow = new Entity(Vec3(0, 0.1f, 0), Vec3(toRadians(180), toRadians(90), 0), Vec3(0.25f, 0.25f, 0.25f), "cow", None)
   val quad = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.01f, 0.01f, 0.01f), "quad", None)
   val particle = new Entity(Vec3(0, 0, 0), Vec3(toRadians(180), 0, 0), Vec3(0.05f, 0.05f, 0.05f), "particle", None)
   
   val corridorEnts = EntityFactory.createCorridorEntities(corridorModels)
   val corridorSect = new Corridor(corridorEnts,Vec3(0,-1,0))
-  val corridorFull =  Vector.tabulate(100)(f => corridorSect.clone(Vec3(0, -1, f*4)))
+  val corridorFull =  Vector.tabulate(64)(f => corridorSect.clone(Vec3(0, -1, f*4)))
   
+  val entities = Vector[Entity](cow)
+    
   //val corridorFull = Vector.tabulate(100)(f => new Entity(Vec3(0, -1, f*4), Vec3(toRadians(180), 0, 0), Vec3(1, 1, 1), "corridor", None))
   
   var explosions = Map[ParticleEmitter, String](
@@ -130,10 +134,10 @@ object ProcessingTest extends PApplet {
       (new ParticleEmitter(Vec3(0.5f, 0, 113f), 500, 50, rand, particle, Vec4(1f, 1f, 1f, 0.5f)), "pe_00540h"),
       (new ParticleEmitter(Vec3(0.6f, 0, 113f), 500, 50, rand, particle, Vec4(1f, 1f, 0f, 0.5f)), "pe_00540h"),
       
-      (new ParticleEmitter(Vec3(-0.6f, 0.5f, 126.5f), 500, 50, rand, particle, Vec4(1, 1f, 1f, 0.5f)), "pe_00580h"),
-      (new ParticleEmitter(Vec3(-0.6f, 0, 126.5f), 500, 100, rand, particle, Vec4(1, 0.7f, 0f, 0.5f)), "pe_00580h"),
-      (new ParticleEmitter(Vec3(0.6f, 0.5f, 126.5f), 500, 50, rand, particle, Vec4(1, 1f, 1f, 0.5f)), "pe_00580h"),
-      (new ParticleEmitter(Vec3(0.6f, 0, 126.5f), 500, 100, rand, particle, Vec4(1, 0.7f, 0f, 0.5f)), "pe_00580h")
+      (new ParticleEmitter(Vec3(-0.6f, 0.5f, 125.5f), 500, 50, rand, particle, Vec4(1, 1f, 1f, 0.5f)), "pe_00580h"),
+      (new ParticleEmitter(Vec3(-0.6f, 0, 125.5f), 500, 100, rand, particle, Vec4(1, 0.7f, 0f, 0.5f)), "pe_00580h"),
+      (new ParticleEmitter(Vec3(0.6f, 0.5f, 125.5f), 500, 50, rand, particle, Vec4(1, 1f, 1f, 0.5f)), "pe_00580h"),
+      (new ParticleEmitter(Vec3(0.6f, 0, 125.5f), 500, 100, rand, particle, Vec4(1, 0.7f, 0f, 0.5f)), "pe_00580h")
       )
   
   var cameraPos = Vec3(10, 0, 10)
@@ -143,8 +147,9 @@ object ProcessingTest extends PApplet {
   //var fov = 45.0f
   var zNear = 0.3f
   var zFar = 1000.0f
-  val h = 600
-  val w = 800
+  val h = 720
+  val w = 1280
+  
   var stationLightPos = Array.tabulate(4)(f => new Vec3(0,0,10))
   var stationLightColor = Vec4(0.2f, 0.0f, 0.2f, 1.0f)
   var stationLightRadius = 1.0f
@@ -165,7 +170,7 @@ object ProcessingTest extends PApplet {
     background(0)
     lights()
     //shapes("teapot") = loadShape("data/teapot.obj")
-    //shapes("cow") = loadShape("data/cow.obj")
+    shapes("cow") = loadShape("data/cow.obj")
     shapes("quad") = loadShape("data/quad.obj")
     shapes("particle") = loadShape("data/particle.obj")
     //shapes("corridor") = loadShape("data/corridor.obj")
@@ -237,7 +242,7 @@ object ProcessingTest extends PApplet {
     val corridorStuff = corridorFull.map(e => e.getEntities()).fold(Vector[Entity]())(_++_)
     var gl = gl2.get
     gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
-    var tex = drawEntitiesToTexture(corridorStuff, shaders("test"))
+    var tex = drawEntitiesToTexture(corridorStuff ++ entities, shaders("test"))
     var fbo = framebuffers("test")
 //    shader(shaders("screen"))
     
@@ -279,14 +284,19 @@ object ProcessingTest extends PApplet {
 //    drawTextureToScreen(framebuffers("explosions").textures, shaders("explosions"))
     
     shader(shaders("cow"))
-    drawEntities(Vector(cow), shaders("cow"))
+    resetShader
+    if (vMan("slenderCow") == 1.0f) {
+      gl.glDisable(GL.GL_DEPTH_TEST)
+      drawEntities(entities, shaders("cow"))
+      gl.glEnable(GL.GL_DEPTH_TEST)
+    }
     resetShader
     
   }
   
   // For updating logic
   def update() = {
-    
+    updateCow()
     vMan.update()
     explosions.foreach(e => e._1.updateTo(vMan(e._2)))
     
@@ -298,7 +308,10 @@ object ProcessingTest extends PApplet {
     
     //starfield.position = cameraPos
   }
-  
+  def updateCow() {
+    //println("moo!")
+    entities(0).position = new Vec3(0, -0.5f, cameraPos.z - vMan("cow_distance")) //zFar)
+  }
   def updateStationLights() = {
     stationLightColor = new Vec4(vMan("station_light_r"), vMan("station_light_g"),vMan("station_light_b"),vMan("station_light_a"))
     stationLightInten = vMan("station_light_intensity")
